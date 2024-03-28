@@ -1,6 +1,0 @@
-Code web sử dụng PHP với công cụ XAMPP
-Nếu bạn chưa cài XAMPP :https://www.apachefriends.org/download.html
-Nếu đã cài đặt:
-	Tạo cơ sở dữ liệu với tên: store_data trên PHPMyAdmin
-	Insert dữ liệu trong file store_data.sql vào
- 
