@@ -1,0 +1,255 @@
+KHOA CÔNG NGHỆ THÔNG TIN
+BÁO CÁO CHUYÊN ĐỀ HỌC PHẦN
+PHÂN TÍCH THIẾT KẾ HƯỚNG ĐỐI TƯỢNG
+ĐỀ TÀI: PHÂN TÍCH THIẾT KẾ HỆ THỐNG 	
+ QUẢN LÝ SIÊU THỊ ĐIỆN MÁY 
+Sinh viên thực hiện
+Mã sinh viên
+: NGUYỄN PHƯƠNG NAM
+: 18810310146
+Giảng viên hướng dẫn
+: LÊ THỊ TRANG LINH
+Ngành
+: CÔNG NGHỆ THÔNG TIN
+Chuyên ngành
+: CÔNG NGHỆ PHẦN MỀM
+Lớp
+: D13 CNPM2
+Khóa
+: 2018-2022
+Hà Nội, tháng năm 2019
+PHIẾU CHẤM ĐIỂM
+Sinh viên thực hiện:
+Họ và tên
+Chữ ký
+Ghi chú
+Giảng viên chấm:
+Họ và tên
+Chữ ký
+Ghi chú
+Giảng viên chấm 1 :
+Giảng viên chấm 2 :
+	MỤC LỤC
+LỜI CẢM ƠN
+Ngày nay việc ứng dụng công nghệ thông tin đã trở nên phổ biến trong hầu hết mọi nơi tất cả các ngành nghề, công việc đều có thể ứng dụng công nghệ thông tin vào công tác quản lý .
+Trong những năm gần đây sự phát triển của công nghệ thông tin ngày càng nổi bật tốc độ phát triển như vũ bão, công nghệ thông tin dần dần có mặt thay thế và trở thành công cụ đắc lực hỗ trợ con người. Vì vậy, để bắt kịp với nhịp độ phát triển xã hội, những nền tảng kiến thức học trên giảng đường là vô cùng quan trọng với Sinh viên chúng em .
+Em xin chân thành xin gửi lời cảm ơn đến đặc biệt đến cô giáo Lê Thị Trang Linh người đã tận tình hướng dẫn môn Phân Tích Thiết Kế Hướng Đối Tượng cho em trong từng buổi học. Cô đã trang bị cho chúng em kiến thức môn học và hơn cả là động lực tiếp tục trên con đường chinh phục công nghệ .
+Chúng em xin chân thành cảm ơn các thầy các cô bộ môn đã tận tình giảng dạy chúng em trong suốt thời gian qua. Nhờ có sự chỉ dạy tận tình của thầy cô để giúp chúng em hoàn thành báo cáo này.
+Em xin chân thành cảm ơn!
+LỜI NÓI ĐẦU
+Ngày nay khi chất lượng cuộc sống của con người được nâng cao thì con người ngày càng đòi hỏi nhiều hơn về các nhu cầu khác cho bản thân một trong số đó là nhu cầu về công nghệ thiết bị hiện đại là phục vụ mọi mặt trong cuôc sống của con người. Vì thế hiện nay đã có rất nhiều cơ sở bán và cung cấp các thiết bị điện máy phục vụ cho nhu cầu mọi người. Nhưng việc gia tăng quá nhiều cửa hàng hay các chuỗi cửa hàng lớn phục vụ nhu cầu mua sắm như vậy mà như ta đã biết ngày nay công nghệ đang trở nên rất hiện đại vì thế mà có đa dạng mẫu mã thiết bị điện máy phục vụ nhiều nhu cầu, công việc khác nhau vì thế việc quản lý gặp rất nhiều khó khăn và những cách quản lý thủ công hiện đang không phải là giải pháp tối ưu nhất.
+Với sự phát triển của công nghệ thông tin luôn cố gắng đáp ứng các yêu cầu của con người. Việc đưa công nghệ thông tin áp dụng vào quản lý đã và đang được đưa vào thực hiện để thể hiện tốc độ và độ chính xác.
+Với việc tạo ra hệ thống : " Quản lý siêu thị điện máy " em muốn tạo ra một hệ thống giúp các chủ của hàng có thể dễ dàng quản lý cửa hàng, chuỗi cửa hàng của mình một cách đơn giản, tối ưu và hiệu quả nhất. Với các tính năng được xây dựng trên nhu cầu thực tế mà chủ cửa hàng đang cần để xử lý công việc của mình.
+CHƯƠNG I .NẮM BẮT YÊU CẦU 
+1.1. Mô tả bài toán
+Tại một chuỗi siêu thị điên máy lớn nổi tiếng có nhiều cơ sở khác nhau tại nhiều khu vực khác nhau thu hút một số lượng khách hàng lớn tới mua sắm phục vụ nhu cầu về các sản phẩm điện máy hiện đại .
+Thông tin tất cả các sản phẩm , nhân viên, khách hàng, kho hàng, tiền lương, thiết bị phần cứng tại cửa hàng, được quản lý chặt chẽ từ tên quần sản phẩm, thương hiệu , nhà may, số lượng, công dụng, chức năng, mẫu mã, kiểu dáng chất liệu, màu sắc, bảng giá , tình trạng tồn kho ,thẻ tích điểm ....Tất cả các thông tin này sẽ dược nhập vào cơ sở dữ liệu của phần mềm quản lý rồi từ đó có thể tạo các nhóm sản phẩm theo yêu cầu đặt ra. Các nhóm sản phẩm, thiết bị, máy móc đó phải được thống kê cụ thể chi tiết tùy theo yêu cầu của siêu thị.
+Nhân viên bán hàng có thông tin của các loại mặt hàng kinh doanh khi khách hàng có nhu cầu cần mua để từ đó tạo ra danh sách và hóa đơn các sản phẩm sẽ được bán để đáp ứng nhu cầu của khách hàng. Khách hàng có 2 cách mua hàng của cửa hàng, thứ nhất là mua online tại website liên kết với phần mềm của cửa hàng thứ hai là tới siêu thị chọn mua trực tiếp , căn cứ vào đó để tiến hành xét nhu cầu mặt hàng mà khách hàng muốn mua. Cửa hàng sẽ kiểm tra kho tại cửa hàng xem số lượng và mặt hàng tồn kho có đáp ứng đủ cho khách hàng hay không? Từ đó sẽ đưa ra những giải pháp để cung cấp đầy đủ cho khách hàng.. Khi đã đáp ứng đầy đủ số lượng mặt hàng, khách hàng tới quầy thu ngân thanh toán thì nhân viên thu ngân tiến hành tạo hóa đơn và in danh sách mặt hàng có số lượng và giá tiền của từng loại sản phẩm đồng thời kiểm tra một lần cuối tất cả thông tin về sản phẩm đã bán trước khi giao tới tay khách hàng.
+Sau khi hoàn tất công việc kiểm tra check thông tin hóa đơn tiến hành giao sản phẩm cho khách hàng.
+Khi nhập số lượng sản phẩm lớn cần quản lý sẽ tiến hành đưa về nhập kho của cửa hàng để dễ dàng quản lý và thống kê báo cáo khi chủ cửa hàng yêu cầu.
+Mỗi thời điểm trong năm cửa hàng có thể đưa ra những chương trình khuyến mại cụ thể cho cửa hàng của mình để thu hút khách hàng.
+1.2 Hiện trạng quản lý cửa hàng
+Mô tả : Hiện nay các cửa hàng điện máy đang cung cấp rất nhiều mặt hàng sản phẩm trang thiết bị công nghệ, máy móc khác nhau phục vụ đời sống hiện đại của con người,cùng với việc ngày càng nhiều đối tượng khách hàng khác nhau cùng với công việc quản lý về nhiều hoạt động khác nhau trong cửa hàng vì vậy công việc quản lý hệ thống của các cửa hàng gặp rất nhiều khó khăn.
+1.3 Quy trình quản lý
+- Thời gian làm việc : 7h30-22h mọi ngày trong tuần.
+-Siêu thị điện máy PN
+Hiện tại siêu thị điện máy đang có 24 nhân viên chia làm 3 ca: 
+	-Ca sáng(Từ 7h30h-11h30h)
+	-Ca chiều(Từ 11h30-17h)
+	-Ca tối(Từ 17h-22h)
+-	Mỗi ca gồm 8 nhân viên túc trực gồm: 2 nhân viên thu ngân, 3 nhân viên tư vấn, 1 nhân viên kho, 2 nhân viên set up.
+-	Của hàng nhập thông tin các loại máy móc thiết bị hiện đại có mặt trong của hàng của mình như : Tivi, tủ lạnh, điều hòa, máy giặt, quạt máy, điện thoại thông minh, laptop, ....
+-	Khi có khách hàng đến mua hàng, dựa vào nhu cầu của khách hàng sẽ biết được cần phải đưa ra những sự lựa chọn và tư vấn phù hợp cho từng đối tượng khách hàng, từ đó sẽ có sự sắp xếp cụ thể.
+-	Khi xác định được nhu cầu của khách hàng sẽ tiến hành xuất hóa đơn có thông tin mua và bán cụ thể với từng loại mặt hàng, thực hiện quản lý và in hóa đơn tự động sẽ giúp giải phóng công việc viết hóa đơn bằng tay chậm và dễ sai sót đồng thời sẽ lưu trữ hóa đơn trên hệ thống tránh việc thất lạc hóa đơn.
+-	Sau đó sản phẩm được khách hàng mua sẽ được giao tới tay cho khách hàng.
+1.4 Nhược điểm của quy trình quản lý hiện tại
+-	Hầu hết quan lý bằng phương pháp thủ công bán tự động.
+-	Chủ siêu thị khó khăn trong quản lý số lượng hàng hóa và hóa đơn, khi kinh doanh số lượng lớn gặp khó khăn trong quá trình tạo hóa đơn và quản lý số lượng hàng hóa tại các cửa hàng.
+-	Khó khăn trong quản lý nhân viên tại của hàng, quản lý khách hàng, quản lý các đơn hàng.
+-	Việc quản lý kho hàng không được triệt để.
+-	Không có các liên kết tương thích với hệ thống cảnh báo và giám sát cửa hàng.
+1.5.Yêu cầu của cửa hàng trong tương lai
++Có một hệ thống quản lý giúp cho công việc tại cửa hàng được thuận tiện hơn.
++Các chức năng quản lý chính của siêu thị
+-	Quản lý khách hàng:có quyền truy cập
+-	Quản lý nhân viên:
+-	Quản lý nhà cung cấp:
+-	Quản lý sản phẩm:
+-	Quản lý khuyến mại:
+-	Quản lý hóa đơn:
+-	Lập báo cáo, thống kê.
+-	Đăng nhập:
+-	Đăng xuất:
+-	Thanh toán:
+-	Quản lý kho hàng
+*	Nhân viên bán hàng
+-	Đăng nhập
+-	Lập hóa đơn
+-	Quầy giao dịch.
+*	Quản lý
+-	Quản lý khách hàng
+-	Quản lý sản phẩm.
+-	Nhập hàng.
+-	Xuất hàng.
+-	Nhà cung cấp.
++Yêu cầu lập báo cáo
+-	Báo cáo doanh thu theo tháng
+-	Báo cáo tồn kho theo tháng
+*	Nhân viên kho
+-	Tạo phiếu nhập
+-	Tạo phiếu xuất
+-	Kiểm kê hàng hóa
++Yêu cầu thống kê
+-	Thống kê danh sách các mặt hàng
+-	Thống kê các quầy hàng trong siêu thị
+- 	Thống kê danh sách nhân viên 
+-	Thống kê danh sách khách hàng
+-	Thống kê danh sách nhà cung cấp
+-	Phiếu hóa đơn
+-	Phiếu nhập hàng
+-	Phiếu xuất hàng.
++Yêu cầu tra cứu
+-	Tra cứu thông tin khách hàng.
+-	Tra cứu thông tin nhân viên.
+-	Tra cứu thông tin mặt hàng.
+-	Tra cứu thông tin nhà cung cấp.
+Mô tả
+Chức năng
+Quản lí khách hàng
+Giúp cửa hàng quản lí được thông tin khách hàng thân thiện, khách hàng bình thường.
+Quản lí nhân viên
+Quản lí chấm công, hệ số lương của nhân viên.
+Quản lí nhà cung cấp
+Giúp chủ cửa hàng có thể dễ dàng tìm kiếm nhà cung cấp phù hợp.
+Quản lý hóa đơn
+Giúp quản lý các hóa đơn đơn hàng đã và đang bán dẽ dàng.
+Quản lý hệ thống giám sát,máy in,máy scan
+Giúp việc quản lý các hệ thống camera giám sát của siêu thị dễ dàng hoạt động thống nhất với hệ thống quản lý cửa hàng.
+Quản lý hệ thống 
+Cập nhật ,xóa sửa, thêm thông tin,thống kê báo cáo tình hình hiện tại về các công việc trong hệ thống siêu thị 
+Quản lý kho hàng
+Quản lý việc xuất nhập tồn kho tại thời điểm hiện tại của siêu thị.
+Quản lý chương trình khuyến mại
+Thiết lập được những khuyến mại để thúc đẩy doanh số bán hàng đồng thời đẩy nhanh số lượng hàng tồn kho nhập hàng mới.
+1.5.1.Quản lý nhân vên tại của hàng
+-	Nhân Viên (Mã nhân viên, Tên nhân viên ,Chứng minh thư, Số điện thoại,Email, Địa Chỉ, Ngày sinh, Giới tính, Chức vụ, Lương).
+-	Phần mềm lưu trữ thông tin nhân viên :Tên nhân viên, lịch làm việc , lương cơ bản, lương theo ca làm, phân quyền nhân viên
+-	Phân quyền nhân viên tại cửa hàng : phần mềm sẽ cung cấp cho mỗi nhân viên một tài khoản đăng nhập và cung cấp các quyền có thể dùng dược tại mỗi vị trí của từng người.
+-	Bảng chấm công làm việc giúp theo dõi quá trình làm việc cảu nhân viên tai của hàng trong tuần, tháng.
+- 	Hệ thống chỉ cho phép người quản lý nhân sự thực hiện các chức năng sau: cập nhật, tra cứu, và hủy bỏ thông tin cá nhân của nhân viên.
+-	Hệ thống cho phép người chủ của siêu thị thực hiện các chức năng sau: Lập danh sách nhân viên trong siêu thị gồm ; mã nhân viên, họ tên, ngày sinh, địa chỉ, giới tính, bộ phận mà nhân viên trực thuộc.
+1.5.2 Quản lý khách hàng
+-	 Khách Hàng (Mã khách hàng, Tên khách hàng, Địa chỉ, Chứng minh thư, Số điện thoại, Email, Mã khuyến mại).
+-	Thông tin khách hàng : tên khách hàng , địa chỉ, số điện thoại.
+-	Sản phẩm của khách hàng đã mua trước đó để đưa ra những khuyến mãi hấp dẫn cho khách hàng thân quen của siêu thị.
+1.5.3.Quản lý hóa đơn( áp dụng cả mua online)
+-	Hóa đơn ( Mã hóa đơn , mã sản phẩm, tên sản phẩm, Ngày lập đơn, mô tả)
+-	Đơn hàng chưa soạn : là những đơn hàng chưa soạn cho khách,nếu là đơn hàng được in màu đỏ thì là đơn cần ưu tiên soạn trước , đơn vàng thì chuẩn bị, đơn đen thì chưa cần thực hiện ngay có thể soạn sau cùng.
+-	Đơn hàng đã soạn: là những đơn hàng soạn và chuẩn bi giao cho khách.
+-	Đơn hàng đang vận chyển: là những đơn hàng đang được giao chưa tới tay khách hàng.
+-	Đơn đã đã bán :là những đơn đã bán và giao tới khách hàng
+1.5.4.Quản lý kho hàng
+-	Kho(Tên kho, Mã hàng, tên hàng,)
+-	Quản lý nhiều kho hàng, nhiều chi nhánh khác nhau, quản lý hàng hóa bằng serial/imei, quản lý điều chuyển hàng hóa (kèm imei/serial) giữa các kho trong hệ thống.
+-	Chức năng quản lý kho hàng : biểu đồ use case thể hiện chức năng nhập kho, biểu đồ Diagram thể hiện chức năng nhập kho.
+-	 Xuất kho : Nhập phiếu xuất kho lưu và lưu thông tin các mặt hàng vào cơ sở dữ liệu và cập nhật tình hình hàng hóa trong kho, biểu đồ use case và Sequence thể hiện chức năng xuất kho.
+-	Hệ thống danh mục đầy đủ : kho hàng, hàng hóa, dịch vụ, nhóm, đơn vị bán hàng , nhà cung cấp, nhà sản xuất... .
+-	Nhập kho :
+ +	 Xử lý quy trình nhập hàng: Kế hoạch nhập hàng –&gt; Đơn đặt 	hàng –&gt; Bộ phận kiểm duyệt kế hoạch duyệt đơn hàng –&gt; 	Chốt đơn hàng –&gt; Cập nhật thông tin hàng trên đường đi –&gt; Kiểm 	duyệt và nhập hàng về kho —&gt; Công nợ/ Thanh toán. 
+ +	Nhập số lượng hàng hóa theo đơn hàng mua nhà cung cấp
+-	Kiểm kho : Kiểm tra mức lệnh giữa tồn kho và thực tế .
+1.5.5.Quản lý hệ thống
+Báo cho người giám sát hoặc chủ siêu thị về hoạt động của siêu thị.
++ Hệ thống quản lý có thể tương thích với các thiết bị phần cứng tại của hàng:
+-	Máy in các loại : giúp cho việc in các hóa đơn, văn bản, hợp đồng tại siêu thị.
+-	Camera giám sát : Quản lý tất cả các hoạt động tại siêu thị.
+-	Máy tính bàn và laptop : thực hiện hầu hết các nhiệm vụ của siêu thị.
+- 	Các thiết bị di động thông minh .
+-	Máy đọc mã vạch : check mã vạch trên các sản phẩm, hóa đơn có mã
+-	Máy chủ tại siêu thị .....
+-	Thẻ tích điểm: Cho khách hàng thường xuyên mua hàng tại các hệ thống của siêu thị.
+1.5.6.Quản lý các chương trình khuyến mại
+-	Khuyến Mại (Mã khuyến mại, Tên khuyến mại, Mức khuyến mại).
+-	Hầu hết ngày nay các siêu thị không đơn thuần là bán hàng tại cửa hàng mà còn bán trên các hệ thống website hay các trang thương mai điện tử lớn, từ đó họ sẽ thiết lập được những khuyến mại để thúc đẩy doanh số bán hàng đồng thời đẩy nhanh số lượng hàng tồn kho nhập hàng mới. Khi sử dụng phần mềm quản lý này cửa hàng có thể dễ dàng thiết lập các chương trình khuyến mại riêng của mình.
+1.5.7.Quản lý nhà cung cấp
+-	Nhà Cung Cấp (Mã nhà cung cấp, Tên nhà cung cấp, Địa chỉ)
+-	Các sản phẩm của siêu thị đều có nguồn gốc xuất xứ từ nguồn cung cấp mà siêu thị nhập để đảm bảo về nguồn hàng và gốc xuất xứ của mỗi sản phẩm đến tay khách hàng.
+1.5.8.Quản lý sản phẩm
+-	Sản phẩm(Tên sản phẩm, Mã sản phẩm, loại sản phẩm, xuất xứ, mô tả)
+-	Chức năng quản lý sản phẩm giúp nhân viên siêu thị dễ dàng quản lý từng loại sản phẩm theo các thông tin đã lưu trong cơ sở dữ liệu.
+1.6. Các Thuộc tính của hệ thống
+Dễ dàng sử dụng, không cần đào tạo nhiều.
+Đảm bảo tốc độ và an toàn trong lưu trữ và xử lý dữ liệu.
+Khả năng nâng cấp bảo trì dễ dàng.
+Cấu hình máy chủ: Tối thiểu PIII 500, &gt;256 MB Ram, dung lượng ổ cứng &gt; 10 GB. Hệ quản trị CSDL được cài là SQL Sever hoặc My SQL. Weblogic 4.0 hoặc Tomcat sever.
+Cấu hình mấy trạm: Tối thiểu C 433, &gt; 64 MB Ram. Có cài đặt IE 4 trở lên.
+Chương II : PHÂN TÍCH THIẾT KẾ HỆ THỐNG
+2.Sơ đồ Use Case
+Biểu đồ use case là một mô hình đồ họa về các chức năng của hệ thống từ khung nhìn của người sử dụng.
+2.1.Sơ đồ use case tổng quát.
+Hình 2.1.Sơ đồ use case tổng quát.
+2.2.Mô tả tác nhân và vẽ sơ đồ cụ thể
+2.2.1.Nhân viên
+Nhân viên làm theo ca hoặc nhân viên làm full time vào mỗi đầu giờ khi bắt đầu nhận ca, nhân viên đăng nhập vào hệ thống và tích điểm danh ca làm. 
+Nhân viên có thể tìm mặt hàng theo tên danh mục nhóm hàng hoặc theo mã hàng. Nhập thông tin về mã hàng hoặc tên hàng, hệ thống sẽ tìm kiếm theo yêu cầu và gửi kết quả lại cho nhân viên biết.
+Nhân viên có thể tìm khách hàng theo mã hoặc tên sau đó có thể tùy chọn các chức năng tương ứng như nhập thông tin khách hàng, xóa thông tin khách hàng, sửa thông tin khách hàng..
+Nhân viên nhập thông tin tên hàng mà khách hàng đã lựa chọn tại siêu thị.Sau khi nhập hết thông tin khách hàng cùng thông tin sản phẩm khách hàng mua thì nhân viên tiến hành làm các thủ tục hợp đồng mua bán. Khách hàng ký kết hợp đồng sau đó nhân viên thu ngân sẽ lập và in hóa đơn cho khách hàng và sao lưu tất cả thông tin vào hệ thống.
+Hình 2.2.1.Sơ đồ use case chi tiết của nhân viên.
+2.2.2.Quản Lí
+Quản lí có thể tìm nhà cung cấp theo tên hoặc địa chỉ rồi sau đó có thể tùy chọn các chức năng tương ứng như nhập thông tin nhà cung cấp, xóa thông tin nhà cung cấp, sửa thông tin nhà cung cấp. 
+Quản lí có thể nhập thông tin nhân viên, xóa thông tin nhân viên, sửa thông tin nhân viên.Quản lí có trách nhiệm thống kê thu chi,hóa đơn,hàng nhập,nguyên liệu tồn.Sau đó in ra báo cáo.
+Hình 2.2.2.Biểu đồ use case chi tiết của quản lý
+2.2.3.Khách Hàng
+- Tên ca sử dụng : Quản lý thông tin khách hàng
+ - Mục đích : Kiểm soát thông tin khách hàng đã đăng ký tour du lịch. 
+- Tóm lược: Sau khi lựa chọn tour du lịch, khách hàng ghi các thông tin cá nhân và gửi lại cho hệ thống, hệ thống sẽ lưu lại các thông tin đó.
+-Khách hàng có nhu cầu mua hàng khi tới siêu thị được nhân viên tư vấn về các sản phẩm có công dụng chức năng như nhu cầu khách hàng đặt ra. Sau khi được nhan viên tư vấn về các sản phẩm khách hàng đồng ý và xem xét kỹ lưỡng về sản phẩm muốn mua tại của hàng và quyết định đặt mua thì khách hàng tới quầy thu ngân làm các thủ tục mua hàng và cung cấp thông tin cá nhân để nhân viên có thể lập hợp đồng mua bán sản phẩm, khách hàng có thể thanh toán ngay thông qua hai hình thức là qua thẻ ngân hàng hoặc tiền mặt. Khách hàng có thể lập thẻ mua hàng để tích điểm giảm giá sản phẩm cho những lần mua tiếp theo tại hệ thống của siêu thị.
+Hình 2.2.3 Biểu đồ use case chi tiết của khách hàng.
+2.2.4.Biểu đồ use case đăng nhập
+- Tên use case: Đăng nhập
+ - Mục đích: cho phép nhân viên siêu thị đăng nhập thông qua tài khoản và mật khẩu đã đăng ký trước đó.
+ - Mỗi nhân viên có thể truy cập vào hệ thống để tra cứu, sửa đổi thông tin các liên quan. 
+-Đối tác : nhân viên
+Hình. Biểu đồ use case đăng nhập.
+2.2.4.Biểu đồ use case chức năng lập hóa đơn
+- Tên use case: Lập hóa đơn
+ - Mục đích: cho phép nhân viên siêu thị đăng nhập thông qua tài khoản và mật khẩu đã đăng ký trước đó và tiến hành quét mã từng sản phẩm để tiến hành đưa ra giá thành sản phẩm mà khách hàng muốn mua rồi lưu thông tin vào CSDL đồng thời in hóa đơn cho khách hàng.
+-Đối tác : nhân viên
+2.2.5.Biểu đồ use case quản lý nhà cung cấp
+- Tên use case: Quản lý nhà cung cấp
+ - Mục đích: cho phép người quản lý siêu thị đăng nhập thông qua tài khoản và mật khẩu đã đăng ký trước đó và thêm sửa xóa thông tin về nhà cung cấp nơi mà siêu thị nhập các sản phẩm thiết bị điện máy rồi lưu thông tin vào CSDL đồng thời in hóa đơn để báo cáo cho chủ siêu thị về tình hình xuất nhập hàng hóa và đơn vị hợp tác với siêu thị.
+-Đối tác : Quản lý
+2.3.Biểu đồ hoạt động
+Lược đồ hoạt động biểu diễn các hoạt động và sự đồng bộ, chuyển tiếp các hoạt động của hệ thống trong một lớp hoặc kết hợp giữa các lớp với nhau trong một chức năng cụ thể.
+ − Lược đồ hoạt động có thể được sử dụng cho nhiều mục đích khác nhau, ví dụ như:
+-	Để xác định các hành động phải thực hiện trong phạm vi một phương thức.
+-	 Để xác định công việc cụ thể của một đối tượng. 
+-	 Để chỉ ra một nhóm hành động liên quan của các đối tượng được thực hiện như thế nào và chúng sẽ ảnh hưởng đến những đối tượng nằm xung quanh
+2.3.1. Biểu đồ hoạt động chức năng đăng nhập . 
+-Mô tả: Use case cho phép người dùng đang nhập vào hệ thống bằng tài khoản được cấp của mình để sử dụng chương trình.
+-Dòng sự kiện chính:
+Biểu đồ hoạt động chức năng đăng nhập . 
+-Dòng sự kiện khác: Không có
+-Yêu cầu đặc biệt: Không có
+-Tiền điều kiện:
+Người dùng phải được cấp tài khoản.
+Người dùng chưa đăng nhập tài khoản của mình vào hệ thống. 
+-Hậu điều kiện: Nếu use case thành công thì sẽ được sử dụng hệ thông tương ứng. Ngược lại, trạng thái hệ thống sẽ không thay đổi.
+-Điểm mở rộng: Không có
+2.3.2. Biểu đồ hoạt động chức năng đăng xuất
+-Mô tả:Use case cho phép người dùng chấm dứt phiên làm việc của mình với hệ thống bằng cách thoát khỏi tài khoản của mình của mình khỏi hệ thống.
+-Dòng sự kiện chính:
+Biểu đồ hoạt động chức năng đăng xuất
+-Dòng sự kiện khác: Không có
+-Yêu cầu đặc biệt: Không có
+-Tiền điều kiện: Tài khoản đã đăng nhập và chưa đăng xuất khỏi hệ thống.
+-Hậu điều kiện: Nếu use case thành công thì tài khoản sẽ không làm việc được trên hệ thống với các chức năng của người dùng. Ngược lại, trạng thái hệ thống không thay đổi.
+2.3.3.Biểu đồ hoạt động quản lý khách hàng
+-Mô tả:Thông tin của khách hàng đã được lưu trữ vào cơ sở dữ liệu khi khách hàng mua sản phẩm của siêu thị.Use case quản lý khách hàng cho phép nhân viên có thể lưu trữ và xử lí dữ liệu của khách hàng đã đặt và mua sản phẩm để tạo thành những thông tin hữu ích. Ngoài ra,nhà quản lý có thể thực hiện chức năng quảng cáo các sản phẩm mới và các chương trình khuyến mại tới hòm Email hoặc số điện thoại mà khách hàng đăng ký thông tin tại siêu thị điện máy.
+-Dòng sự kiện chính:
+Biểu đồ hoạt động quản lý khách hàng
+-Dòng sự kiện khác: Không có
+-Yêu cầu đặc biệt: Không có
+-Tiền điều kiện:
+Nhân viên phải đăng nhập vào hệ thống. 
+Thông tin của khách hàng phải được lưu trữ 
