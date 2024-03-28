@@ -1,0 +1,143 @@
+<?php
+require '../Chung/php/connect.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--logo-->
+    <link rel="icon" href="../../../../WEB_BAN_HANG/Data/Logo/logo.ico">
+
+    <!--CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../Chung/CSS_bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="../Chung/css/header.css">
+    <link rel="stylesheet" href="../Chung/css/style.css">
+    <link rel="stylesheet" href="../Chung/css/footer.css">
+    
+
+
+    <!--javascript-->
+    
+    <!--Tinh/Thanh pho-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    
+    <script src="../Chung/js/header.js" defer></script>
+
+    <!-- <script src="https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script> -->
+    
+    <!--Script chen html-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <header>
+        <?php include ("../Chung/php/head.php")?>
+    </header>
+    <main>
+
+    
+        <div class="container">
+            <div class="row flex-container">
+            <div class="p-2 flex-grow-1 bd-highlight fs-4">GẠO LỨT</div>
+                <?php
+                $sql = "SELECT * FROM product WHERE type = 'Gao_Lut'";
+                $result = mysqli_query($conn, $sql);
+
+                // Initializing a variable to keep track of the ID
+                $counter = 1;
+
+                while ($row = mysqli_fetch_array($result)) {
+                    if($row['quantity'] > 0){
+
+                    
+                ?>
+                
+                <div class="col-md-3 mb-4 product-item">
+                    <div class="p-3 border bg-light text-center ">
+                    <img src="../../Data/Gao/<?php echo $row['type'] . '/'; ?><?php echo $row['image'] ?>"
+                            class="product-image img-fluid rounded mx-auto d-block " alt="<?php echo $row['product_name'] ?>">
+                        <div class="mt-2"><?php echo $row['product_name'] ?></div>
+                        <div class="row">
+                            <div class="col-auto mr-auto">
+                                <div class="mt-2 red-price fs-5"><?php echo number_format($row['price'], 0, ',', '.') ?> &#8363;</div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="mt-2">Đã bán: <?php echo $row['sold'];?> </div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mt-3"> 
+                            <form action="../Chung/php/addtocart.php" method="post">
+                                <input type="hidden" name="product_id" value="<?php echo $row['product_id'] ?>">
+                                <input type="hidden" name="image" value="<?php echo $row['image'] ?>">
+                                <input type="hidden" name="product_name" value="<?php echo $row['product_name'] ?>">
+                                <input type="hidden" name="type" value="<?php echo $row['type']; ?>">
+                                <input type="hidden" name="quantity" value="1">
+                                <input type="hidden" name="price" value="<?php echo $row['price'] ?>"> 
+                                <input type="hidden" name="id_user" value="<?php echo $id_user ?>"> 
+                                <button class="btn btn-secondary btn-sm"  type="submit" name="detail_pro">Chi tiết</button>
+                                <button type="submit" class="btn btn-primary btn-sm" name="addtocart">Thêm vào giỏ hàng</button>
+                            </form>
+                        </div>
+                    
+                    </div>
+                </div>
+
+                <?php
+                    }
+                }
+                ?>
+        </div>
+    </main>
+    <footer>
+        <?php include ("../Chung/php/foot.php")?>
+    </footer>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('myForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission action
+
+            var formData = new FormData(this); // Get form data
+
+            var xhr = new XMLHttpRequest(); // Create a new XMLHttpRequest object
+            xhr.open('POST', '../Chung/php/addtocart.php', true); // Configure the request
+            xhr.onload = function () { // Define function to handle response
+                if (xhr.status === 200) { // If the request was successful
+                    console.log(xhr.responseText); // Log response to console
+                    // Delay showing the alert for 500 milliseconds
+                    setTimeout(function () {
+                        alert('Sản phẩm đã được thêm vào giỏ hàng thành công!');
+                    }, 500);
+                } else { // If the request failed
+                    console.error(xhr.responseText); // Log error response to console
+                    // Delay showing the alert for 500 milliseconds
+                    setTimeout(function () {
+                        alert('Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng.');
+                    }, 500);
+                }
+            };
+            xhr.onerror = function () { // Define function to handle errors
+                console.error('Có lỗi khi kết nối đến máy chủ.'); // Log connection error
+                // Delay showing the alert for 500 milliseconds
+                setTimeout(function () {
+                    alert('Có lỗi khi kết nối đến máy chủ.');
+                }, 500);
+            };
+            xhr.send(formData); // Send the form data via AJAX
+        });
+    });
+</script>
+    <script type="text/javascript">
+        $('#head_content').load('../Chung/php/head.php');
+        $('#foot_content').load('../Chung/php/foot.php');
+    </script>
+</body>
+</html>

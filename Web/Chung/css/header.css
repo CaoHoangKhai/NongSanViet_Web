@@ -1,0 +1,28 @@
+
+header {
+    font-size: 2vw;
+    margin: 2px 5px;
+}
+
+.navbar .navbar-light{
+    background-color: green;
+}
+.button {
+    min-width: 40px;
+    height: 10px;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+.hidden-button {
+    display: none;
+}
+
+.navbar-collapse.collapse.show {
+    transition: height 0.3s ease;
+}
+/* Custom CSS for hover effect */
+.navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin Tức-Nông Sản Việt</title>
+
+    <!--logo-->
+    <link rel="icon" href="../../../../WEB_BAN_HANG/Data/Logo/logo.ico">
+
+    <!--CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../Chung/CSS_bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="../Chung/css/header.css">
+    <link rel="stylesheet" href="../Chung/css/style.css">
+    <link rel="stylesheet" href="../Chung/css/footer.css">
+
+
+    <!--javascript-->
+
+    <!--Tinh/Thanh pho-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+    <script src="../Chung/js/header.js" defer></script>
+
+
+    <!-- <script src="https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script> -->
+
+    <!--Script chen html-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        body {
+            background-image: none !important; /* Loại bỏ hình nền */
+            background-color: #fff !important; /* Đặt màu nền thành trắng */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="head_content"></div>
+    </header>
+    <main>
+       
+        <div class="container">
+            <p class="text-center fs-5 text-muted"><strong>CHUYÊN MỤC: TIN TỨC</strong></p>
+            <a>
+                <hr class="dropdown-divider">
+            </a>
+
+            <div class="row flex-container">
+                <div class="col-sm mb-4">
+                    <div class="p-3 text-center">
+                        <a href="#" class="link-dark fs-5">
+                            <img src="../../../../WEB_BAN_HANG/Data/TinTuc/Data/3_cach_lam_sua_gao_lut_don_gian_nhat_tai_nha_cho_cac_me.png"
+                                class="product-image img-fluid rounded mx-auto d-block full-width" alt="Hình ảnh">
+                            <div>
+                                3 cách làm sữa gạo lứt đơn giản nhất tại nhà cho các mẹ
+                            </div>
+                        </a>
+                        <div class="col">Sữa gạo lứt rất tốt cho sức khỏe,
+                            phòng chống ung thư…, </div>
+                    </div>
+                </div>
+
+                <div class="col-sm mb-4">
+                    <div class="p-3 text-center">
+                        <a href="#" class="link-dark fs-5">
+                            <img src="../../../../WEB_BAN_HANG/Data/TinTuc/Data/cach_nau_sua_gao_lut_thom_ngon_kho_cuong_don_gian_nhat_tai_nha.png"
+                                class="product-image img-fluid rounded mx-auto d-block full-width" alt="Hình ảnh">
+                            <div>
+                                Cách nấu sữa gạo lứt thơm ngon khó cưỡng đơn giản nhất tại nhà
+                            </div>
+                        </a>
+                        <div class="col">Gạo lứt chứa nhiều chất dinh dưỡng quan trọng như Vitamin E, B1,... </div>
+                    </div>
+                </div>
+
+                <div class="col-sm mb-4">
+                    <div class="p-3 text-center" >
+                        <a href="../TinTuc/Data/suat_an_cong_nghiep.html" class="link-dark fs-5">
+                            <img src="../../../../WEB_BAN_HANG/Data/TinTuc/Data/suat_an_cong_nghiep.png"
+                                class="product-image img-fluid rounded mx-auto d-block full-width" alt="Hình ảnh">
+                            <div>
+                                Cung cấp gạo cho suất ăn công nghiệp
+                            </div>
+                        </a>
+                        <div>Nắm bắt được nhu cầu thiết yếu của thị trường hiện nay...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm mb-4">
+                        <div class="p-3 text-center">
+                            <a href="#" class="link-dark fs-5">
+                                <img src="../../../../WEB_BAN_HANG/Data/TinTuc/Data/bi_quyet_nau_com_gao_lut_khong_can_ngam_ma_van_deo_ngon_2020.png"
+                                    class="product-image img-fluid rounded mx-auto d-block full-width" alt="Hình ảnh">
+                                <div>
+                                    Bí quyết nấu cơm gạo lứt không cần ngâm mà vẫn dẻo ngọt 2020
+                                </div>
+                            </a>
+                            <div>
+                                Làm theo cách nấu cơm gạo lứt này, bạn sẽ không mất thời gian ngâm,...</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm mb-4">
+                        <div class="p-3 text-center">
+                            <a href="#" class="link-dark fs-5">
+                                <img src="../../../../WEB_BAN_HANG/Data/TinTuc/Data/ba_bau_co_nen_an_gao_lut.png"
+                                    class="product-image img-fluid rounded mx-auto d-block full-width" alt="Hình ảnh">
+                                <div>
+                                    Phụ nữ mang thai ăn gạo lứt có an toàn và loại nào là tốt nhất?
+                                </div>
+                            </a>
+                            <div>
+                                Gạo lứt là thực phẩm rất tốt cho sức khỏe mọi người,...</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm mb-4">
+                        <div class="p-3 text-center">
+                            <a href="#" class="link-dark fs-5">
+                                <img src="../../../../WEB_BAN_HANG/Data/TinTuc/Data/gao_lut_thong__tin_day_du_tu_a_den_z.png"
+                                    class="product-image img-fluid rounded mx-auto d-block full-width" alt="Hình ảnh">
+                                <div>
+                                    Gạo lứt – thông tin đầy đủ “từ A đến Z”
+                                </div>
+                            </a>
+                            <div>
+                                Hiện nay nhu cầu sử dụng gạo lứt ngày càng nhiều vì ... </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm mb-4">
+                        <div class="p-3 text-center">
+                            <a href="#" class="link-dark fs-5">
+                                <img src="../../../../WEB_BAN_HANG/Data/TinTuc/Data/lua_gao_Viet_Nam_mung_va_lo.png"
+                                    class="product-image img-fluid rounded mx-auto d-block full-width" alt="Hình ảnh">
+                                <div>
+                                    Lúa gạo Việt Nam: mừng và lo
+                                </div>
+                            </a>
+                            <div>
+                                Đi tìm giải pháp cho thương hiệu cây lúa, ...</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm mb-4">
+                        <div class="p-3 text-center">
+                            <a href="#" class="link-dark fs-5">
+                                <img src="../../../../WEB_BAN_HANG/Data/TinTuc/Data/bi_tieu_duong_an_gao_lut_duoc_khong.png"
+                                    class="product-image img-fluid rounded mx-auto d-block full-width" alt="Hình ảnh">
+                                <div>
+                                    Bị tiểu đường ăn gạo lứt được không?
+                                </div>
+                            </a>
+                            <div>
+                                Gạo lứt là loại ngũ cốc nguyên hạt tốt cho sức khỏe...</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm mb-4">
+                        <div class="p-3 text-center">
+                            <a href="#" class="link-dark fs-5">
+                                <img src="../../../../WEB_BAN_HANG/Data/TinTuc/Data/giong_lua_lam_nen_gao_ngon_nhat_the_gioi_se_duoc_trong_tai_Bac_Lieu.pnh.png"
+                                    class="product-image img-fluid rounded mx-auto d-block full-width" alt="Hình ảnh">
+                                <div>
+                                    Giống lúa làm nên gạo ngon nhất thế giới sẽ được trồng tại Bạc Liêu
+                                </div>
+                            </a>
+                            <div>
+                                Giống lúa ST25 làm nên hạt gạo ngon nhất thế giới được trồng tại Bạc Liêu năm nay...</div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </main>
+
+    <footer>
+        <div id="foot_content"></div>
+    </footer>
+</body>
+<script type="text/javascript">
+    $('#head_content').load('../Chung/php/head.php');
+    $('#foot_content').load('../Chung/php/foot.php');
+</script>
+
+</html>

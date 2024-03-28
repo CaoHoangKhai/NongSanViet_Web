@@ -1,0 +1,151 @@
+/* desktop */
+@media screen and (min-width: 900px) {
+    footer .footer-column {
+        grid-template-areas:
+            "left-cell left-cell right-cell"
+        ;
+    }
+}
+
+/* mobile */
+@media screen and (max-width: 900px) {
+    footer .footer-column {
+        grid-template-areas:
+            "left-cell"
+            "right-cell"
+        ;
+    }
+}
+
+/* Thiết lập footer */
+footer {
+    grid-area: footer-cell;
+    min-height: 120px;
+    margin-top: auto; /* Đảm bảo footer luôn nằm ở dưới cùng */
+    border: 1px solid var(--mau-vien);
+    box-sizing: border-box;
+}
+
+/* Thiết lập layout cho cột trong footer */
+footer .footer-column {
+    height: 100%;
+    display: grid;
+    grid-gap: 10px;
+    justify-items: center;
+    align-items: center;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+footer .footer-column > * {
+    width: 100%;
+    height: 100%;
+
+    background-color: #53382c33;
+}
+
+/* footer cong dong */
+footer .footer-column .footer-cong-dong {
+    grid-area: left-cell;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* bản quyền */
+footer .ban-quyen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    margin: 5px;
+
+    color: var(--mau-nen);
+}
+
+/* danh sách các mạng xã hội */
+.danh-sach-mang-xa-hoi {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 5px 0px;
+    padding: 0px;
+
+    list-style-type: none;
+}
+
+footer .mang-xa-hoi {
+    margin: 0px 5px;
+    color: var(--mau-vien);
+}
+
+footer .mang-xa-hoi:hover {
+    color: var(--i);
+}
+/* footer .instagram {
+    background: radial-gradient(circle at 33% 100%, #fed373 4%, #f15245 30%, #d92e7f 62%, #9b36b7 85%, #515ecf);
+    background-clip: content-box;
+} */
+
+/* footer thong tin */
+footer .footer-column .footer-thong-tin {
+    grid-area: right-cell;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    font-size: smaller;
+    padding: 5px 5px 5px 10px;
+    box-sizing: border-box;
+}
+footer .footer-column .footer-thong-tin > * {
+    display: flex;
+    margin: 4px 0px;
+}
+footer .footer-column .footer-thong-tin .fa {
+    width: 30px;
+    text-align: center;
+}
+footer .footer-thong-tin-dia-chi,
+.footer-thong-tin-std,
+.footer-thong-tin-mail {
+    color: var(--mau-vien);
+}
+footer .footer-thong-tin-dia-chi:hover,
+.footer-thong-tin-std:hover,
+.footer-thong-tin-mail:hover {
+    color: var(--mau-nen);
+}
+
+/* nút về đầu trang web */
+footer #ve-dau-trang {
+    width: 50px;
+    height: 50px;
+
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 10;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid var(--mau-vien);
+    padding: 10px;
+    box-sizing: border-box;
+
+    color: var(--mau-nen);
+    background-color: #ccc8;
+}
+
+footer #ve-dau-trang:hover {
+    color: var(--mau-chu);
+    background-color: var(--mau-nen);
+}
+

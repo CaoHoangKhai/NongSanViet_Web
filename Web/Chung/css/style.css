@@ -1,0 +1,75 @@
+/* Container chứa hình ảnh */
+.image-container {
+    position: relative;
+    width: 100%;
+    margin: auto;
+}
+
+/* Định dạng hình ảnh */
+img {
+    width: 100%;
+    height: 80%;
+    display: block;
+}
+
+/* Form tìm kiếm trong navbar */
+.navbar-form {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+}
+
+/* Input tìm kiếm */
+.search-input {
+    margin-right: 5px;
+}
+
+/* Nút giỏ hàng */
+.cart-button {
+    margin-left: 20px;
+}
+
+/* Màu chữ đỏ */
+.text-danger {
+    color: red;
+}
+
+/* Định dạng hình ảnh sản phẩm */
+.product-image {
+    width: 187.6px;
+    height: 187.6px;
+}
+
+/* Màu chữ đỏ cho giá tiền */
+.red-price {
+    color: red;
+}
+
+/* Màu chữ đen cho giá tiền và đậm */
+.black-price {
+    color: black;
+    font-weight: bold;
+}
+
+/* Định dạng hình ảnh để chiếm toàn bộ không gian mà không bị méo */
+.full-width {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+}
+
+/* Nút trong suốt */
+.transparent-button {
+    background-color: #fff;
+    color: #6c757d;
+    border-color: #6c757d;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Hiệu ứng hover cho nút trong suốt */
+.transparent-button:hover {
+    color: #28a745;
+    background-color: #fff;
+    border-color: #28a745;
+}
