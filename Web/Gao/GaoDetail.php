@@ -36,6 +36,12 @@ require '../Chung/php/connect.php';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        body {
+            background-image: none !important; /* Loại bỏ hình nền */
+            background-color: #fff !important; /* Đặt màu nền thành trắng */
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -44,6 +50,14 @@ require '../Chung/php/connect.php';
     <main>
         <div class="container">
             <div class="row">
+                <?php
+                    if (!empty($_SESSION['success_message'])) {
+                        $_SESSION['success_expire'] = time() + 1; // Thời gian hết hạn là 3 giây
+                        ?>
+                        <div class="alert alert-success mb-1" id="success-alert" role="alert"><?= $_SESSION['success_message'] ?></div>
+                        <?php unset($_SESSION['success_message']);
+                    }
+                ?>
                 <?php 
                     $product_id = $_SESSION['product']['product_id'];
                     // $product_name = $_SESSION['product']['product_name'];
@@ -63,6 +77,7 @@ require '../Chung/php/connect.php';
                     <a>CHI TIÊT SẢN PHẨM</a>
                 </span>
                 <div class="col-5 text-end">
+                    
                 <br>
                     
                     <img src="../../Data/Gao/<?php echo $row['type'] . '/'; ?><?php echo $row['image'] ?>" style="width: 400px;height:400px">
@@ -70,11 +85,34 @@ require '../Chung/php/connect.php';
                 <div class="col-7">
                     <span class="fs-5 text-start"><strong><?php echo $row['product_name']?></strong></span>
                     <p class="red-price fs-2 fw-bolder"><?php echo number_format($row['price'], 0, ',', ',') ?> &#8363;</p>
-                    <span class=" text-start"><?php echo preg_replace('/\[|\]/', '<br>', $row['content']) ?></span>
+                    <span class=" text-start"><?php echo preg_replace('/\[|\]/', '<br>', $row['content'],) ?><br></span>
+                    <br>
+                    <div class="mb-3">
+                        <b>Thời gian bảo quản:</b> <?php echo $row['hsd'] ?> tháng
+                    </div>
+                    <div class="mb-3">
+                        <b>Nhà sản xuất:</b> <?php echo $row['nhacungcap'];?>
+                    </div>
+                    <div class="mb-3">
+                        <b>Nơi canh tác:</b> <?php echo $row['noicanhtac'];?>
+                    </div>
+                    <div class="mb-3">
+                        <b>Bao quản:</b> <?php echo $row['baoquan'];?>
+                    </div>
+                    <div class="d-flex justify-content-between mt-3"> 
+                        <form action="addGao.php" method="post">
+                            <input type="hidden" name="product_id" value="<?php echo $row['product_id'] ?>">
+                            <input type="hidden" name="image" value="<?php echo $row['image'] ?>">
+                            <input type="hidden" name="product_name" value="<?php echo $row['product_name'] ?>">
+                            <input type="hidden" name="type" value="<?php echo $row['type']; ?>">
+                            <input type="hidden" name="quantity" value="1">
+                            <input type="hidden" name="price" value="<?php echo $row['price'] ?>"> 
+                            <input type="hidden" name="id_user" value="<?php echo $id_user ?>"> 
+                            <button type="submit" class="btn btn-primary btn-sm" name="addtocartDetail">Thêm vào giỏ hàng</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <div>Hạn sử dụng: <?php echo $row['hsd'] ?>tháng</div>
-        </div>
+                
             <?php
                 }
             ?>
@@ -84,6 +122,21 @@ require '../Chung/php/connect.php';
     <footer>
         <?php include ("../Chung/php/foot.php")?>
     </footer>
-    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var successAlert = document.getElementById('success-alert');
+            var expireTime = <?= !empty($_SESSION['success_expire']) ? $_SESSION['success_expire'] : 0 ?>;
+
+            if (successAlert && expireTime > 0) {
+                setTimeout(function () {
+                    successAlert.style.display = 'none';
+                }, (expireTime - <?= time() ?>) * 1000);
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        $('#head_content').load('../Chung/php/head.php');
+        $('#foot_content').load('../Chung/php/foot.php');
+    </script>
 </body>
 </html>

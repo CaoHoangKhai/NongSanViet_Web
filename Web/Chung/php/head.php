@@ -89,6 +89,7 @@ require 'connect.php';
                 <div class=" d-flex align-items-center">
                 <form class="navbar-form d-flex" action ="../../../../WEB_BAN_HANG/Web/Gao/GaoSearch.php" method="POST" onsubmit="return validateForm()">
                     <input class="form-control search-input" placeholder="Search" aria-label="Search" name="search_name" id="search_name">
+
                     <div class="invalid-feedback" id="error-message" style="color: red;"></div>
                     
                     <button class="btn btn-outline-success me-2" type="submit" name="search">Search</button>

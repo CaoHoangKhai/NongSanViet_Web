@@ -46,6 +46,14 @@ require '../Chung/php/connect.php';
     
         <div class="container">
             <div class="row flex-container">
+            <?php
+                if (!empty($_SESSION['success_message'])) {
+                    $_SESSION['success_expire'] = time() + 1; // Thời gian hết hạn là 3 giây
+                    ?>
+                    <div class="alert alert-success mb-1" id="success-alert" role="alert"><?= $_SESSION['success_message'] ?></div>
+                    <?php unset($_SESSION['success_message']);
+                }
+            ?>
             <div class="p-2 flex-grow-1 bd-highlight fs-4">GẠO LỨT</div>
                 <?php
                 $sql = "SELECT * FROM product WHERE type = 'Gao_Lut'";
@@ -75,7 +83,7 @@ require '../Chung/php/connect.php';
                         </div>
                         
                         <div class="d-flex justify-content-between mt-3"> 
-                            <form action="../Chung/php/addtocart.php" method="post">
+                            <form action="addGao.php" method="post">
                                 <input type="hidden" name="product_id" value="<?php echo $row['product_id'] ?>">
                                 <input type="hidden" name="image" value="<?php echo $row['image'] ?>">
                                 <input type="hidden" name="product_name" value="<?php echo $row['product_name'] ?>">
@@ -84,7 +92,7 @@ require '../Chung/php/connect.php';
                                 <input type="hidden" name="price" value="<?php echo $row['price'] ?>"> 
                                 <input type="hidden" name="id_user" value="<?php echo $id_user ?>"> 
                                 <button class="btn btn-secondary btn-sm"  type="submit" name="detail_pro">Chi tiết</button>
-                                <button type="submit" class="btn btn-primary btn-sm" name="addtocart">Thêm vào giỏ hàng</button>
+                                <button type="submit" class="btn btn-primary btn-sm" name="addtocartL">Thêm vào giỏ hàng</button>
                             </form>
                         </div>
                     
@@ -101,40 +109,17 @@ require '../Chung/php/connect.php';
         <?php include ("../Chung/php/foot.php")?>
     </footer>
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('myForm').addEventListener('submit', function (e) {
-            e.preventDefault(); // Prevent the default form submission action
+        document.addEventListener("DOMContentLoaded", function () {
+            var successAlert = document.getElementById('success-alert');
+            var expireTime = <?= !empty($_SESSION['success_expire']) ? $_SESSION['success_expire'] : 0 ?>;
 
-            var formData = new FormData(this); // Get form data
-
-            var xhr = new XMLHttpRequest(); // Create a new XMLHttpRequest object
-            xhr.open('POST', '../Chung/php/addtocart.php', true); // Configure the request
-            xhr.onload = function () { // Define function to handle response
-                if (xhr.status === 200) { // If the request was successful
-                    console.log(xhr.responseText); // Log response to console
-                    // Delay showing the alert for 500 milliseconds
-                    setTimeout(function () {
-                        alert('Sản phẩm đã được thêm vào giỏ hàng thành công!');
-                    }, 500);
-                } else { // If the request failed
-                    console.error(xhr.responseText); // Log error response to console
-                    // Delay showing the alert for 500 milliseconds
-                    setTimeout(function () {
-                        alert('Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng.');
-                    }, 500);
-                }
-            };
-            xhr.onerror = function () { // Define function to handle errors
-                console.error('Có lỗi khi kết nối đến máy chủ.'); // Log connection error
-                // Delay showing the alert for 500 milliseconds
+            if (successAlert && expireTime > 0) {
                 setTimeout(function () {
-                    alert('Có lỗi khi kết nối đến máy chủ.');
-                }, 500);
-            };
-            xhr.send(formData); // Send the form data via AJAX
+                    successAlert.style.display = 'none';
+                }, (expireTime - <?= time() ?>) * 1000);
+            }
         });
-    });
-</script>
+    </script>
     <script type="text/javascript">
         $('#head_content').load('../Chung/php/head.php');
         $('#foot_content').load('../Chung/php/foot.php');

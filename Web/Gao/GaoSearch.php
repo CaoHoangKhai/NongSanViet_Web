@@ -1,13 +1,19 @@
 <?php
 
 require '../Chung/php/connect.php';
+
 ?>
 
 <?php
-    if(isset($_POST['search'])){
-        $search_name = $_POST['search_name'];
-    }
+$search_name = ""; // Khởi tạo biến search_name để tránh lỗi Undefined index khi không có dữ liệu post từ form
+if(isset($_SESSION['search_name'])){
+    $search_name = $_SESSION['search_name']; // Sử dụng giá trị từ session
+}
 
+if(isset($_POST['search'])){
+    $search_name = $_POST['search_name'];
+    $_SESSION['search_name'] = $search_name; // Lưu giá trị vào session
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +58,14 @@ require '../Chung/php/connect.php';
     <main>
         <div class="container">
             <div class="row flex-container">
-                
+            <?php
+                if (!empty($_SESSION['success_message'])) {
+                    $_SESSION['success_expire'] = time() + 1; // Thời gian hết hạn là 3 giây
+                    ?>
+                    <div class="alert alert-success mb-1" id="success-alert" role="alert"><?= $_SESSION['success_message'] ?></div>
+                    <?php unset($_SESSION['success_message']);
+                }
+            ?>
                 <br>
 
                 <br>
@@ -67,10 +80,12 @@ require '../Chung/php/connect.php';
                 $totalProduct = $row['total_p'];
                 echo '<div class="col-6 fs-4">Kết quả tìm kiếm</div>';
                 echo '<div class="col-6 text-end">Sản phẩm tìm thấy: ' .  $totalProduct . '</div>';
+                $_SESSION['search_name'] = $search_name;
                 while ($row = mysqli_fetch_array($result)) {
                     if($row['quantity'] > 0){
                 ?>
                 
+
                 <div class="col-md-3 mb-4 product-item">
                     <div class="p-3 border bg-light text-center ">
                     <img src="../../Data/Gao/<?php echo $row['type'] . '/'; ?><?php echo $row['image'] ?>"
@@ -87,7 +102,7 @@ require '../Chung/php/connect.php';
                         </div>
                         
                         <div class="d-flex justify-content-between mt-3"> 
-                            <form action="../Chung/php/addtocart.php" method="post">
+                            <form action="addGao.php" method="post">
                                 <input type="hidden" name="product_id" value="<?php echo $row['product_id'] ?>">
                                 <input type="hidden" name="image" value="<?php echo $row['image'] ?>">
                                 <input type="hidden" name="product_name" value="<?php echo $row['product_name'] ?>">
@@ -97,7 +112,7 @@ require '../Chung/php/connect.php';
                                 <input type="hidden" name="id_user" value="<?php echo $id_user ?>"> 
                                 <input type="hidden" name="link" value="GaoSearch.php"> 
                                 <button class="btn btn-secondary btn-sm"  type="submit" name="detail_pro">Chi tiết</button>
-                                <button type="submit" class="btn btn-primary btn-sm" name="addtocart">Thêm vào giỏ hàng</button>
+                                <button type="submit" class="btn btn-primary btn-sm" name="addtocartSearch">Thêm vào giỏ hàng</button>
                             </form>
                         </div>
                    
@@ -120,40 +135,25 @@ require '../Chung/php/connect.php';
         <?php include ("../Chung/php/foot.php")?>
     </footer>
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('myForm').addEventListener('submit', function (e) {
-            e.preventDefault(); // Prevent the default form submission action
-
-            var formData = new FormData(this); // Get form data
-
-            var xhr = new XMLHttpRequest(); // Create a new XMLHttpRequest object
-            xhr.open('POST', '../Chung/php/addtocart.php', true); // Configure the request
-            xhr.onload = function () { // Define function to handle response
-                if (xhr.status === 200) { // If the request was successful
-                    console.log(xhr.responseText); // Log response to console
-                    // Delay showing the alert for 500 milliseconds
-                    setTimeout(function () {
-                        alert('Sản phẩm đã được thêm vào giỏ hàng thành công!');
-                    }, 500);
-                } else { // If the request failed
-                    console.error(xhr.responseText); // Log error response to console
-                    // Delay showing the alert for 500 milliseconds
-                    setTimeout(function () {
-                        alert('Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng.');
-                    }, 500);
-                }
-            };
-            xhr.onerror = function () { // Define function to handle errors
-                console.error('Có lỗi khi kết nối đến máy chủ.'); // Log connection error
-                // Delay showing the alert for 500 milliseconds
-                setTimeout(function () {
-                    alert('Có lỗi khi kết nối đến máy chủ.');
-                }, 500);
-            };
-            xhr.send(formData); // Send the form data via AJAX
+        document.addEventListener("DOMContentLoaded", function() {
+            var searchNameInput = document.getElementById('search_name');
+            var searchName = "<?php echo isset($search_name) ? $search_name : ''; ?>";
+            searchNameInput.value = searchName;
         });
-    });
-</script>
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var successAlert = document.getElementById('success-alert');
+            var expireTime = <?= !empty($_SESSION['success_expire']) ? $_SESSION['success_expire'] : 0 ?>;
+
+            if (successAlert && expireTime > 0) {
+                setTimeout(function () {
+                    successAlert.style.display = 'none';
+                }, (expireTime - <?= time() ?>) * 1000);
+            }
+        });
+    </script>
     <script type="text/javascript">
         $('#head_content').load('../Chung/php/head.php');
         $('#foot_content').load('../Chung/php/foot.php');
