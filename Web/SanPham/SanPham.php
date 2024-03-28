@@ -70,7 +70,7 @@ if(isset($_SESSION['user_info']) && !empty($_SESSION['user_info'])) {
             
             <div class="row flex-container">
                 <?php
-                 if(isset($_GET['trang'])){
+                if(isset($_GET['trang'])){
                     $page = $_GET['trang'];
                 }else{
                     $page = '';

@@ -46,7 +46,17 @@
                 }
             ?>
             <?php
-            $sql = "SELECT * FROM order_customer WHERE id_user = '$id_user' ORDER BY id_order DESC";
+            if(isset($_GET['trang'])){
+                $page = $_GET['trang'];
+            }else{
+                $page = '';
+            }
+            if( $page == '' ||  $page == 1){
+                $begin =0;
+            }else {
+                $begin = ($page*7)-7;
+            }
+            $sql = "SELECT * FROM order_customer WHERE id_user = '$id_user' ORDER BY id_order DESC LIMIT  $begin,7";
             $result = mysqli_query($conn, $sql);
 
             // Kiểm tra xem có đơn hàng nào hay không
@@ -112,6 +122,35 @@
                     ?>
                 </tbody>
             </table>
+                <?php
+                    $count = "SELECT COUNT(*) as total FROM order_customer WHERE id_user = '$id_user'";
+                    $kq = $conn->query($count);
+                    $row = $kq->fetch_assoc();
+                    $totalCustomers = $row['total'];
+                    $trang = ceil($totalCustomers/7);
+                ?>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end" id="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="order_user.php?trang=1" aria-label="Previous">
+                                <span aria-hidden="true" name="first">&laquo;</span>
+                            </a>
+                        </li>
+                        <?php
+                        for($i =1;$i <= $trang;$i++){
+                        ?>
+                        <li class="page-item"><a class="page-link" href="order_user.php?trang=<?php echo $i ?>"><?php echo $i ?></a></li>
+                        <?php
+                        }
+                        ?>
+
+                        <li class="page-item">
+                            <a class="page-link" href="order_user.php?trang=<?php echo $trang ?>" aria-label="Next">
+                                <span aria-hidden="true" name="last">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             <?php
             } else {
                 // Hiển thị thông báo khi không có đơn hàng
