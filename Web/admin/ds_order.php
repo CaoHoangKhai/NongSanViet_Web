@@ -277,6 +277,7 @@ include "sidebar.php";
                                 }
                                 echo '</select>
                                                 <input type="hidden" name="id_order" value="' . $row['id_order'] . '">
+                                                <input type="hidden" name="trang" value="' .  $page . '">
                                                 <button type="submit" class="btn btn-primary mt-3" name="up_status">Cập Nhật Trạng Thái</button>
                                             </form>
                                         </div>';

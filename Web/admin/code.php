@@ -123,17 +123,23 @@ if (isset($_POST['update_product'])) {
 if (isset($_POST['up_status'])) {
     $edit_status = $_POST['edit_status'];
     $id_order = $_POST['id_order'];
-
+    $trang = $_POST['trang'];
+    echo $trang;
     $query = "UPDATE order_customer SET status='$edit_status' WHERE id_order = '$id_order'";
     $query_run = mysqli_query($conn, $query);
 
     if ($query_run) {
         $_SESSION['success'] = "Thông tin đơn hàng đã cập nhật";
-        header('Location: ds_order.php');
     } else {
         $_SESSION['success'] = "Thông tin đơn hàng đã cập nhật thất bại. VUI LÒNG KIỂM TRA LẠI THÔNG TIN";
-        header('Location: ds_order.php');
     }
+    
+    // Đặt lại trang hiện tại sau khi xử lý dữ liệu POST
+
+    $currentPage = isset($_POST['trang']) ? $_POST['trang'] : 1;
+    header("Location: ds_order.php?trang=$currentPage");
+
+    
 }
 
 if (isset($_POST['del_order'])) {

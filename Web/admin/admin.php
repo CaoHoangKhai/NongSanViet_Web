@@ -54,11 +54,22 @@ include "sidebar.php";
                     $row =  $kq_fb->fetch_assoc();
                     $totalFeedBack = $row['total_fb'];
                     
-                
+                    $sql_doanhthu = "SELECT SUM(CASE WHEN status <= 3 THEN price ELSE 0 END) AS sum_condition FROM order_customer;";
+                    $kq_doanhthu = $conn->query($sql_doanhthu);
+                    $row =  $kq_doanhthu->fetch_assoc();
+                    $totaldoanhthu = $row['sum_condition'];
+
+                    function format_doanhthu($totaldoanhthu) {
+                        if ($totaldoanhthu >= 1000000) {
+                            return number_format($totaldoanhthu / 1000000, 1, ',', ' ') . 'M';
+                        } else {
+                            return number_format($totaldoanhthu, 0, ',', ' ');
+                        }
+                    }
                     ?>
                     <div class="container">
                         <div class="row g-2">
-                            <div class="col-4" >
+                            <div class="col-3" >
                                 <a href="ds_product.php" class="link-dark">
                                 <div class="p-3 border bg-info d-flex justify-content-between align-items-center">
                                     <div class=" text-left text-white fs-5">
@@ -72,7 +83,7 @@ include "sidebar.php";
                                 </a>
                             </div>
 
-                            <div class="col-4">
+                            <div class="col-3">
                                 <a href="ds_user.php" class="link-dark">
                                 <div class="p-3 border bg-info d-flex justify-content-between align-items-center">
                                     <div class=" text-left text-white fs-5">
@@ -86,7 +97,7 @@ include "sidebar.php";
                                 </a>
                             </div>
 
-                            <div class="col-4">
+                            <div class="col-3">
                                 <a href="ds_feedback.php" class="link-dark">
                                 <div class="p-3 border bg-info d-flex justify-content-between align-items-center">
                                     <div class="text-left text-white fs-5">
@@ -100,9 +111,22 @@ include "sidebar.php";
                                 </a>
                             </div>
 
+                            
+                            <div class="col-3">
+                                <a href="ds_product.php" class="link-dark">
+                                    <div class="p-3 border bg-info d-flex justify-content-between align-items-center">
+                                        <div class="text-left text-white fs-5">
+                                            <div class="text-left text-white fs-3"><?php echo format_doanhthu($totaldoanhthu);?></div>
+                                            <div>Doanh Thu</div>
+                                        </div>
+                                        <div class="text-right" style="margin-right: 20px;">
+                                            <i class="fa fa-bar-chart" style="font-size:80px;"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
 
-
-                                                    
+                      
                         </div>
                     </div>
 
