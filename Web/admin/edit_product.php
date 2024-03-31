@@ -67,7 +67,7 @@ include "sidebar.php";
                                 <div class="col-md-6">
                                     <label for="formFile" class="form-label fs-6"><strong>Chọn giá tiền cho sản phẩm</strong></label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Chọn giá tiền cho sản phẩm" name="edit_price" value="<?php echo  number_format($row['price'], 0, ',', '.') ?>">
+                                        <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Chọn giá tiền cho sản phẩm" name="edit_price" value="<?php echo  number_format($row['price'], 0, ',', '') ?>">
                                         <!-- <input type="hidden" class="form-control" id="autoSizingInputGroup" placeholder="Chọn giá tiền cho sản phẩm" name="edit_price" value="<?php echo $row['price']  ?>"> -->
                                         <div class="input-group-text">&#8363;</div>
                                     </div>

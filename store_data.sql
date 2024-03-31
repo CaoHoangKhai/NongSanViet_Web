@@ -45,11 +45,6 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`id_user`, `username`, `password`, `phonenumber`, `email`, `city`, `district`, `address`, `role`) VALUES
 (1, 'B2106839', '12', '0834477132', 'hoangcao2307003@gmail.com', '96', '964', '61-63,Lý Văn Lâm,Khóm 3,Phường 1', 0),
-(2, 'Cao Hoàng Khải', 'caohoangkhai', '0834477131', 'caokhai974@gmail.com', '96', '964', '61-63,Lý Văn Lâm,Khóm 3,Phường 1', 0),
-(3, 'Hoàng Hí Hửng(Hết Wibu)', '12', '0768893383', 'hoangwibu@gmail.com', '87', '866', 'Hẻm 553 ,Đường 30/4', 0),
-(4, 'Khangwibu', '123456', '0889580755', 'khang@gmail.com', '96', '971', 's a sa a a', 0),
-(5, 'Yến', '1234', '0943355466', 'yen@gmail.com', '96', '964', '61-63,Lý Văn Lâm,Khóm 3,Phường 1', 1),
-(6, 'Hiếupc', '12', '0943355246', 'hieupc@gmail.com', '01', '250', 'Hẻm 553 ,Đường 30/4', 0),
 (7, 'Trần Thị H', 'password32', '9876543210', 'tranthih2@gmail.com', '96', '964', 'Số 320, Đường HIJ, Quận ABC', 0),
 (8, 'Lê Thị I', 'password33', '1112223330', 'lethii2@gmail.com', '87', '866', 'Số 330, Đường IJK, Quận XYZ', 0),
 (9, 'Phạm Văn K', 'password34', '4445556660', 'phamvank2@gmail.com', '96', '971', 'Số 340, Đường KLM, Quận ABC', 0),
