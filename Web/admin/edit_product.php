@@ -91,12 +91,7 @@ include "sidebar.php";
                                     }
                                     ?>
                                 </div>
-
-
-
                                 
-                                
-
                                 <div class="col-md-6 mt-3">
                                     <a href="ds_product.php" class="btn btn-danger">Cancel</a>
                                     <button type="submit" class="btn btn-primary" name="update_product" value="Cập nhật">Update</button>

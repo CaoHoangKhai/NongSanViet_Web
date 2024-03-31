@@ -113,17 +113,15 @@ include "sidebar.php";
 
                             
                             <div class="col-3">
-                                <a href="ds_product.php" class="link-dark">
-                                    <div class="p-3 border bg-info d-flex justify-content-between align-items-center">
-                                        <div class="text-left text-white fs-5">
-                                            <div class="text-left text-white fs-3"><?php echo format_doanhthu($totaldoanhthu);?></div>
-                                            <div>Doanh Thu</div>
-                                        </div>
-                                        <div class="text-right" style="margin-right: 20px;">
-                                            <i class="fa fa-bar-chart" style="font-size:80px;"></i>
-                                        </div>
+                                <div class="p-3 border bg-info d-flex justify-content-between align-items-center">
+                                    <div class="text-left text-white fs-5">
+                                        <div class="text-left text-white fs-3"><?php echo format_doanhthu($totaldoanhthu);?></div>
+                                        <div>Doanh Thu</div>
                                     </div>
-                                </a>
+                                    <div class="text-right" style="margin-right: 20px;">
+                                        <i class="fa fa-bar-chart" style="font-size:80px;"></i>
+                                    </div>
+                                </div>
                             </div>
 
                       
