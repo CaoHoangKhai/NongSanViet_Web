@@ -324,6 +324,7 @@ if (isset($_POST['save'])) {
 
                                     <form action="code.php" method="post" onsubmit="return confirmDelete()">
                                         <input type="hidden" name="del_id" value="<?php echo $row['id_user']; ?>">
+                                        <input type="hidden" name="trang" value="<?php echo $page ?>">
                                         <button type="submit" name="del_user"class="btn btn-success ">Xóa</button>
                                     </form>
                                         <script>

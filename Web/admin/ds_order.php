@@ -69,7 +69,7 @@ include "sidebar.php";
                         }
                         ?>
                         <?php
-                        $sql = "SELECT order_customer.*, customer.id_user FROM order_customer JOIN customer ON order_customer.id_user = customer.id_user ORDER BY order_customer.id_order DESC  LIMIT $begin,8";
+                        $sql = "SELECT order_customer.*, customer.id_user FROM order_customer JOIN customer ON order_customer.id_user = customer.id_user ORDER BY order_customer.id_order DESC  LIMIT  $begin,8";
                         $result = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_array($result)) {
                             // Lấy id_order từ kết quả truy vấn
@@ -110,6 +110,7 @@ include "sidebar.php";
                                 <td>
                                     <form action="code.php" method="post">
                                         <input type="hidden" name="id_order" value="<?php echo $row['id_order']; ?>">
+                                        <input type="hidden" name="trang" value="<?php echo $page ?>">
                                         <button type="submit" name="del_order_customer" class="btn btn-success">Xóa</button>
                                     </form>
 
@@ -242,7 +243,7 @@ include "sidebar.php";
                                         // echo '<option value="1">Đơn hàng đang được chuẩn bị</option>';
                                         // echo '<option value="2">Đơn hàng đang được vận chuyển</option>';
                                         echo '<option value="3" selected>Đơn hàng giao thành công</option>';
-                                        echo '<option value="4">Đơn hàng vận chuyển thất bại</option>';
+                                        // echo '<option value="4">Đơn hàng vận chuyển thất bại</option>';
                                         // echo '<option value="5">Đơn hàng đang chờ xác nhận (HỦY)</option>';
                                         // echo '<option value="6">Đơn hàng yêu cầu HỦY thành công</option>';
                                         break;

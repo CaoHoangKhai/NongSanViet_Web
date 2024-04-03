@@ -35,7 +35,7 @@ include "sidebar.php";
     <?php
         if(isset($_POST['edit_product'])){
             $id = $_POST['edit_id_product'];
-
+            $trang = $_POST['trang'];
             $result = mysqli_query($conn, "SELECT * FROM `product` WHERE product_id = '$id'");
             $row = mysqli_fetch_assoc($result);
             
@@ -44,6 +44,8 @@ include "sidebar.php";
      <div class="container">
             <form  action="code.php" method="POST">
                 <input type="hidden" name="edit_id" value="<?php echo $row['product_id']; ?>">
+                
+                <input type="hidden" name="trang" value="<?php echo $trang?>">
                     <div class="row">
                         <div class="col-md-10 offset-md-1">
                             <div class="row">
@@ -84,12 +86,14 @@ include "sidebar.php";
                                     <label for="formFile" class="form-label fs-6"><strong>Chọn hình ảnh của sản phẩm</strong></label>
                                     <input class="form-control" type="hidden" id="formFile" name="edit_image_"   value="<?php echo $row['image']; ?>">
                                     <input class="form-control" type="file" id="formFile" name="edit_image" >
+                                    
                                     <?php
                                     if (!empty($row['image'])) {
                                         // Nếu có hình ảnh, hiển thị nó với alt là tên sản phẩm
-                                        echo '<img src="../../Data/Gao/' . $row['type'] . '/' . $row['image'] . '" class="img-fluid" alt="' . $row['product_name'] . '">';
+                                        echo '<img src="../../Data/Gao/' . $row['type'] . '/' . $row['image'] . '" class="img-fluid" style="max-height: 420px;" alt="' . $row['product_name'] . '">';
                                     }
                                     ?>
+                                    
                                 </div>
                                 
                                 <div class="col-md-6 mt-3">

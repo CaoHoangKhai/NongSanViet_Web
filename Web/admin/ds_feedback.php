@@ -85,6 +85,7 @@ include "sidebar.php";
                                     <td>
                                         <form action="code.php" method="post" onsubmit="return confirmDelete()">
                                             <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                            <input type="hidden" name="trang" value="<?php echo $page?>">
                                             <button type="submit" name="del_idpb"class="btn btn-success ">Xóa</button>
                                         </form>
                                         <script>

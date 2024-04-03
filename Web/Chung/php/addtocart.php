@@ -154,9 +154,10 @@ if (isset($_POST['add_one_pro'])) {
         $type = $_POST['type'];
         $image = $_POST['image'];
         $price = $_POST['price'];
-        $quantity = $_POST['quantity'];
-        $i = $_POST['i'];
-        
+        $quantity_sp = $_POST['quantity'];
+        $page = $_POST['trang'];
+        echo $page;
+
         $userInfo = $_SESSION['user_info'];
         $id_user = $userInfo[0];
         $_SESSION['them_sp_thanh_cong'] = true;
@@ -174,22 +175,22 @@ if (isset($_POST['add_one_pro'])) {
 
             if ($conn->query($updateQuery) === TRUE) {
                  $_SESSION['success_message'] = "Bạn đã thêm sản phẩm vào giỏ hàng thành công!";
-                header("Location: ../../SanPham/SanPham.php");
+                header("Location: ../../SanPham/SanPham.php?trang=".$page);
             } else {
                 $_SESSION['them_sp_thanh_cong'] = false;
-                header("Location: ../../SanPham/SanPham.php");
+                header("Location: ../../SanPham/SanPham.php?trang=".$page);
             }
         } else {
             // If the product doesn't exist, insert a new record
             $insertQuery = "INSERT INTO `shopping_cart`(`id_user`, `product_id`, `quantity_sp`) 
-                            VALUES ('$id_user','$product_id','$quantity')";
+                            VALUES ('$id_user','$product_id','$quantity_sp')";
 
             if ($conn->query($insertQuery) === TRUE) {
                  $_SESSION['success_message'] = "Bạn đã thêm sản phẩm vào giỏ hàng thành công!";
-                header("Location: ../../SanPham/SanPham.php");
+                header("Location: ../../SanPham/SanPham.php?trang=".$page);
             } else {
                 $_SESSION['them_sp_thanh_cong'] = false;
-                header("Location: ../../SanPham/SanPham.php");
+                header("Location: ../../SanPham/SanPham.php?trang=".$page);
             }
         }
     }

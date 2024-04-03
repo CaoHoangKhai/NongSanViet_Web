@@ -254,10 +254,17 @@
                                 <div class="col-md-6">
                                     <input type="hidden" name="id_user" value="<?php echo $row['id_user']; ?>">
                                     <input type="hidden" name="id_order" value="<?php echo $row['id_order']; ?>">
-                                    <button type="submit" class="btn btn-primary" value="Hủy Đơn Hàng" name="del_order">Hủy Đơn Hàng</button>
+                                    <?php if ($row['status'] >= 2): ?>
+                                        <!-- Hide the button if status is greater than or equal to 2 -->
+                                        <!-- You can add additional styling or classes to make it hidden -->
+                                        <button type="submit" class="btn btn-primary d-none" value="Hủy Đơn Hàng" name="del_order">Hủy Đơn Hàng</button>
+                                    <?php else: ?>
+                                        <!-- Show the button if status is less than 2 -->
+                                        <button type="submit" class="btn btn-primary" value="Hủy Đơn Hàng" name="del_order">Hủy Đơn Hàng</button>
+                                    <?php endif; ?>
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
-                            </div>
+                            </div> 
                         </form>
                     </div>
                 </div>

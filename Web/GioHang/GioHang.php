@@ -153,7 +153,7 @@ include '../Chung/php/connect.php';
                             
                             <div class="container mt-5">
                                 <button class="btn btn-light transparent-button">
-                                    <a href="../../../../WEB_BAN_HANG/Web/SanPham/SanPham.php" class="text-secondary">
+                                    <a href="../../../../WEB_BAN_HANG/Web/SanPham/SanPham.php?trang=1" class="text-secondary">
                                         <i class="fas fa-arrow-left ml-2"></i>TIẾP TỤC XEM SẢN PHẨM
                                     </a>
                                 </button>

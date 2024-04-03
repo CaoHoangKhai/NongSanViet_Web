@@ -60,12 +60,15 @@ include "sidebar.php";
                     $totaldoanhthu = $row['sum_condition'];
 
                     function format_doanhthu($totaldoanhthu) {
-                        if ($totaldoanhthu >= 1000000) {
+                        if ($totaldoanhthu >= 1000000000) {
+                            return number_format($totaldoanhthu / 1000000000, 1, ',', ' ') . 'B';
+                        } elseif ($totaldoanhthu >= 1000000) {
                             return number_format($totaldoanhthu / 1000000, 1, ',', ' ') . 'M';
                         } else {
                             return number_format($totaldoanhthu, 0, ',', ' ');
                         }
                     }
+                    
                     ?>
                     <div class="container">
                         <div class="row g-2">

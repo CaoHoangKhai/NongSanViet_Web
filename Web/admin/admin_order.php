@@ -269,7 +269,7 @@
                                 '</div>';
 
                         ?>
-                        <form class="row g-3 needs-validation" action="../Chung/php/code.php" method="post" novalidate>
+                        <form class="row g-3 needs-validation" action="code.php" method="post" novalidate>
                             <div class="col-12">
                                 <div class="col-md-6">
                                     <input type="hidden" name="id_user" value="<?php echo $row['id_user']; ?>">

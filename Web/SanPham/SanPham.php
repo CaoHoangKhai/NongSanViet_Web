@@ -114,7 +114,7 @@ if(isset($_SESSION['user_info']) && !empty($_SESSION['user_info'])) {
                                 <input type="hidden" name="price" value="<?php echo $row['price'] ?>"> 
                                 <input type="hidden" name="id_user" value="<?php echo $id_user ?>">
                                 <input type="hidden" name="i" value="<?php echo $i ?>">
-                                <input type="hidden" name="trang" value="<?php echo $trang ?>">
+                                <input type="hidden" name="trang" value="<?php echo $page ?>">
                                 
                                 <button class="btn btn-secondary btn-sm"  type="submit" name="detail_pro">Chi tiết</button>
                                 <button type="submit" class="btn btn-primary btn-sm" name="sp_addtocart">Thêm vào giỏ hàng</button>

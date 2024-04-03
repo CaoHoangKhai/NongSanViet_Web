@@ -45,14 +45,15 @@ if (isset($_POST['update_user'])) {
 <?php
     if (isset($_POST['del_user'])) {
         $id = $_POST['del_id'];
+        $trang = $_POST['trang'];
         $sql = "DELETE  FROM customer WHERE id_user='$id'";
         $query_run = mysqli_query($conn,$sql);
         if($query_run){
             $_SESSION['success'] = "Dữ liệu đã được xóa";
-            header('Location: ds_user.php');
+            header('Location: ds_user.php?trang='.$trang);
         }else{
             $_SESSION['success'] = "Dữ liệu xóa thất bại. VUI LÒNG KIỂM TRA LẠI THÔNG TIN";
-            header('Location: ds_user.php');
+            header('Location: ds_user.php?trang='.$trang);
         }
     }
 ?>
@@ -63,17 +64,18 @@ if (isset($_POST['update_product'])) {
     $product_name = $_POST['edit_product_name'];
     $type = $_POST['edit_type'];
     $quantity = $_POST['edit_quantity'];
+    $page = $_POST['trang'];
     // Kiểm tra nếu 'edit_image' rỗng, lấy giá trị từ 'edit_image_'.
     $image = empty($_POST['edit_image']) ? $_POST['edit_image_'] : $_POST['edit_image'];
 
     $price = $_POST['edit_price'];
     $check_product_name = "SELECT * FROM product WHERE product_name = '$product_name' AND product_id != '$id'";
     $check_product_name_result = mysqli_query($conn, $check_product_name);
-
+    echo $page;
     if (mysqli_num_rows($check_product_name_result) > 0) {
         // Tên sản phẩm đã tồn tại
         $_SESSION['success'] = "Tên Sản Phẩm đã có trong dữ liệu. VUI LÒNG KIỂM TRA LẠI THÔNG TIN";
-        header('Location: ds_product.php');
+        header('Location: ds_product.php?trang='.$page);
     } else {
         // Tiến hành cập nhật nếu tên sản phẩm không bị trùng
         $query = "UPDATE product SET product_name='$product_name', type ='$type', image='$image', price ='$price ', quantity ='$quantity' WHERE product_id = '$id'";
@@ -81,7 +83,7 @@ if (isset($_POST['update_product'])) {
 
         if ($query_run) {
             $_SESSION['success'] = "Dữ liệu đã được cập nhật";
-            header('Location: ds_product.php');
+            header('Location: ds_product.php?trang='.$page);
         } else {
             $_SESSION['success'] = "Dữ liệu cập nhật thất bại. VUI LÒNG KIỂM TRA LẠI THÔNG TIN";
             header('Location: ds_product.php');
@@ -108,14 +110,15 @@ if (isset($_POST['update_product'])) {
 <?php
     if (isset($_POST['del_idpb'])) {
         $id = $_POST['id'];
+        $page=$_POST['trang'];
         $sql = "DELETE  FROM feed_back WHERE id='$id'";
         $query_run = mysqli_query($conn,$sql);
         if($query_run){
             $_SESSION['success'] = "THÔNG TIN ĐÃ ĐƯỢC XỬ LÝ";
-            header('Location: ds_feedback.php');
+            header('Location: ds_feedback.php?trang='.$page);
         }else{
             $_SESSION['success'] = "LỖI HỆ THỐNG";
-            header('Location: ds_feedback.php');
+            header('Location: ds_feedback.php?trang='.$page);
         }
     }
 ?>
@@ -161,14 +164,15 @@ if (isset($_POST['del_order'])) {
 <?php
 if (isset($_POST['del_order_customer'])) {
     $id_order = $_POST['id_order'];
+    $page=$_POST['trang'];
     $sql = "DELETE  FROM order_customer WHERE id_order='$id_order'";
     $query_run = mysqli_query($conn,$sql);
     if($query_run){
         $_SESSION['success'] = "ĐƠN HÀNG ĐÃ ĐƯỢC XÓA";
-        header('Location: ds_order.php');
+        header('Location: ds_order.php?trang='.$page);
     }else{
         $_SESSION['success'] = "LỖI HỆ THỐNG";
-        header('Location: ds_order.php');
+        header('Location: ds_order.php?trang='.$page);
     }
 }
 ?>

@@ -1,7 +1,7 @@
 <nav class="main-menu">
     <ul>
         <li class="has-subnav">
-            <a href="admin.php">
+            <a href="admin.php?trang=1">
                 <i class="fa fa-home fa-2x"></i>
                 <span class="nav-text">
                     Trang Chủ
@@ -9,7 +9,7 @@
             </a>
         </li>
         <li class="has-subnav">
-            <a href="ds_product.php">
+            <a href="ds_product.php?trang=1">
                 <i class="fa fa-list fa-2x" aria-hidden="true"></i>
                 <span class="nav-text">
                     Danh Sách Sản Phẩm
@@ -17,7 +17,7 @@
             </a>
         </li>
         <li class="has-subnav">
-            <a href="ds_user.php">
+            <a href="ds_user.php?trang=1">
                 <i class="fa  fa-user-circle fa-2x" aria-hidden="true"></i>
                 <span class="nav-text">
                     Danh Sách Thành Viên
@@ -26,7 +26,7 @@
         </li>
 
         <li class="has-subnav">
-            <a href="ds_feedback.php">
+            <a href="ds_feedback.php?trang=1">
                 <i class="fa fa-comments fa-2x" aria-hidden="true"></i>
                 <span class="nav-text">
                     Phản Hồi
@@ -35,7 +35,7 @@
         </li>
 
         <li class="has-subnav">
-            <a href="ds_order.php">
+            <a href="ds_order.php?trang=1">
             <i class="fa fa-archive fa-2x" aria-hidden="true"></i>
                 <span class="nav-text">
                    Danh Sách Đơn Hàng
@@ -44,7 +44,7 @@
         </li>
 
         <li class="has-subnav">
-            <a href="admin_order.php">
+            <a href="admin_order.php?trang=1">
             <i class="fa fa-truck fa-2x" aria-hidden="true"></i>
                 <span class="nav-text">
                    Đơn Hàng Của Bạn

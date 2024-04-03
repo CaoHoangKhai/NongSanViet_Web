@@ -207,6 +207,7 @@ if (isset($_POST['add'])) {
                                     <td>
                                         <form action="edit_product.php" method="post">
                                             <input type="hidden" name="edit_id_product" value="<?php echo $row['product_id']; ?>">
+                                            <input type="hidden" name="trang" value="<?php echo $page ?>">
                                             <button type="submit" name="edit_product" class="btn btn-secondary ">Sửa</button>
                                         </form>
                                     </td>
