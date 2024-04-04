@@ -61,7 +61,7 @@ require 'connect.php';
                             <strong>GẠO </strong>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="../../../../WEB_BAN_HANG/Web/SanPham/SanPham.php">Gạo Đặc Sản</a></li>
+                            <li><a class="dropdown-item" href="../../../../WEB_BAN_HANG/Web/SanPham/SanPham.php?trang=1">Gạo Đặc Sản</a></li>
                             <li><a class="dropdown-item" href="../../../../WEB_BAN_HANG/Web/Gao/GaoDeoThom.php">Gạo Dẻo Thơm</a></li>
                             <li><a class="dropdown-item" href="../../../../WEB_BAN_HANG/Web/Gao/GaoNep.php">Gạo Nếp</a></li>
                             <li><a class="dropdown-item" href="../../../../WEB_BAN_HANG/Web/Gao/GaoTam.php">Gạo Tấm</a></li>

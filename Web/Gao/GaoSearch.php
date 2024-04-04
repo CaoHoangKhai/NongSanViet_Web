@@ -65,6 +65,14 @@ if(isset($_POST['search'])){
                     <div class="alert alert-success mb-1" id="success-alert" role="alert"><?= $_SESSION['success_message'] ?></div>
                     <?php unset($_SESSION['success_message']);
                 }
+
+                // Kiểm tra xem session 'error_message' có tồn tại không
+                if (!empty($_SESSION['error_message'])) {
+                    $_SESSION['success_expire'] = time() + 1; // Thời gian hết hạn là 3 giây
+                    ?>
+                    <div class="alert alert-danger mb-1" id="success-alert" role="alert"><?= $_SESSION['error_message'] ?></div>
+                    <?php unset($_SESSION['error_message']);
+                }
             ?>
                 <br>
 

@@ -2,6 +2,23 @@
 include '../Chung/php/connect.php';
 include "header_admin.php"; 
 include "sidebar.php";
+
+// Truy vấn để lấy tổng doanh thu theo ngày
+$sql = "SELECT DATE(created) AS ngay, SUM(price) AS doanh_thu FROM order_customer GROUP BY DATE(created)";
+$result = $conn->query($sql);
+
+// Dữ liệu cho biểu đồ
+$labels = []; // Nhãn cho trục x (ngày)
+$data = []; // Dữ liệu doanh thu tương ứng
+
+// Xử lý kết quả truy vấn
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $labels[] = $row['ngay'];
+        $data[] = $row['doanh_thu'];
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +48,21 @@ include "sidebar.php";
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js" defer></script>
         <script src="../Chung/js/header.js" defer></script>
+        <!-- Đường dẫn đến thư viện Chart.js -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <style>
+            body, html {
+            height: 100vh; /* Chiều cao bằng 100% của kích thước hiển thị của trình duyệt */
+            margin: 0;
+            padding: 0;
+        }
+
+            body {
+                background-image: none !important; /* Loại bỏ hình nền */
+                background-color: #fff !important; /* Đặt màu nền thành trắng */
+            }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -131,6 +163,39 @@ include "sidebar.php";
                         </div>
                     </div>
 
+                    <div class="container">
+                        <!-- Đối với biểu đồ, bạn cần một phần tử canvas -->
+                        <canvas id="doanhThuChart" width="1500" height="395"></canvas>
+
+                        <script>
+                            // Lấy tham chiếu đến phần tử canvas
+                            var ctx = document.getElementById('doanhThuChart').getContext('2d');
+
+                            // Khởi tạo biểu đồ cột
+                            var doanhThuChart = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: <?php echo json_encode($labels); ?>, // Sử dụng dữ liệu từ PHP
+                                    datasets: [{
+                                        label: 'Doanh thu theo ngày',
+                                        data: <?php echo json_encode($data); ?>, // Sử dụng dữ liệu từ PHP
+                                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                                        borderColor: 'rgba(54, 162, 235, 1)',
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
 
                 </div>
             </div>

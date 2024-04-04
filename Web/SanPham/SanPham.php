@@ -50,14 +50,22 @@ if(isset($_SESSION['user_info']) && !empty($_SESSION['user_info'])) {
 
         <div class="container">
             <div class="row">
-                <?php
-                    if (!empty($_SESSION['success_message'])) {
-                        $_SESSION['success_expire'] = time() + 3; // Thời gian hết hạn là 3 giây
-                        ?>
-                        <div class="alert alert-success mb-1" id="success-alert" role="alert"><?= $_SESSION['success_message'] ?></div>
-                        <?php unset($_SESSION['success_message']);
-                    }
-                ?>
+            <?php
+                if (!empty($_SESSION['success_message'])) {
+                    $_SESSION['success_expire'] = time() + 1; // Thời gian hết hạn là 3 giây
+                    ?>
+                    <div class="alert alert-success mb-1" id="success-alert" role="alert"><?= $_SESSION['success_message'] ?></div>
+                    <?php unset($_SESSION['success_message']);
+                }
+
+                // Kiểm tra xem session 'error_message' có tồn tại không
+                if (!empty($_SESSION['error_message'])) {
+                    $_SESSION['success_expire'] = time() + 1; // Thời gian hết hạn là 3 giây
+                    ?>
+                    <div class="alert alert-danger mb-1" id="success-alert" role="alert"><?= $_SESSION['error_message'] ?></div>
+                    <?php unset($_SESSION['error_message']);
+                }
+            ?>
                 <div class="d-flex bd-highlight">
                 
                     <div class="p-2 flex-grow-1 bd-highlight fs-4">GẠO ĐẶC SẢN</div>

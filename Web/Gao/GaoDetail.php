@@ -50,14 +50,22 @@ require '../Chung/php/connect.php';
     <main>
         <div class="container">
             <div class="row">
-                <?php
-                    if (!empty($_SESSION['success_message'])) {
-                        $_SESSION['success_expire'] = time() + 1; // Thời gian hết hạn là 3 giây
-                        ?>
-                        <div class="alert alert-success mb-1" id="success-alert" role="alert"><?= $_SESSION['success_message'] ?></div>
-                        <?php unset($_SESSION['success_message']);
-                    }
-                ?>
+            <?php
+                if (!empty($_SESSION['success_message'])) {
+                    $_SESSION['success_expire'] = time() + 1; // Thời gian hết hạn là 3 giây
+                    ?>
+                    <div class="alert alert-success mb-1" id="success-alert" role="alert"><?= $_SESSION['success_message'] ?></div>
+                    <?php unset($_SESSION['success_message']);
+                }
+
+                // Kiểm tra xem session 'error_message' có tồn tại không
+                if (!empty($_SESSION['error_message'])) {
+                    $_SESSION['success_expire'] = time() + 1; // Thời gian hết hạn là 3 giây
+                    ?>
+                    <div class="alert alert-danger mb-1" id="success-alert" role="alert"><?= $_SESSION['error_message'] ?></div>
+                    <?php unset($_SESSION['error_message']);
+                }
+            ?>
                 <?php 
                     $product_id = $_SESSION['product']['product_id'];
                     // $product_name = $_SESSION['product']['product_name'];
@@ -107,9 +115,12 @@ require '../Chung/php/connect.php';
                             <input type="hidden" name="type" value="<?php echo $row['type']; ?>">
                             <input type="hidden" name="quantity" value="1">
                             <input type="hidden" name="price" value="<?php echo $row['price'] ?>"> 
-                            <input type="hidden" name="id_user" value="<?php echo $id_user ?>"> 
+                            <input type="hidden" name="id_user" value="<?php echo $id_user ?>">  
+                            <input type="hidden" name="link" value="GaoDetail.php"> 
                             <button type="submit" class="btn btn-primary btn-sm" name="addtocartDetail">Thêm vào giỏ hàng</button>
                         </form>
+
+                               
                     </div>
                 </div>
                 

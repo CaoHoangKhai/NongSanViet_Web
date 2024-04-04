@@ -10,50 +10,68 @@ if (!isset($_SESSION['user_info'])) {
     exit(); // Dừng việc thực thi các lệnh tiếp theo sau lệnh header
 }
     if (isset($_POST['addtocart'])) {
-        $product_id = $_POST['product_id'];
-        $product_name = $_POST['product_name'];
-        $type = $_POST['type'];
-        $image = $_POST['image'];
-        $price = $_POST['price'];
-        $quantity = $_POST['quantity'];
-        
-        
-        $userInfo = $_SESSION['user_info'];
-        $id_user = $userInfo[0];
-        $_SESSION['them_sp_thanh_cong'] = true;
+    $product_id = $_POST['product_id'];
+    $product_name = $_POST['product_name'];
+    $type = $_POST['type'];
+    $image = $_POST['image'];
+    $price = $_POST['price'];
+    $quantity = $_POST['quantity'];
+    
+    $userInfo = $_SESSION['user_info'];
+    $id_user = $userInfo[0];
+    $_SESSION['them_sp_thanh_cong'] = true;
 
-        // Check if the product already exists in the shopping cart
-        $checkQuery = "SELECT * FROM `shopping_cart` 
-                       WHERE `id_user` = '$id_user' AND `product_id` = '$product_id'";
-        $result = $conn->query($checkQuery);
+    // Check if the product already exists in the shopping cart
+    $checkQuery = "SELECT * FROM `shopping_cart` 
+                   WHERE `id_user` = '$id_user' AND `product_id` = '$product_id'";
+    $result = $conn->query($checkQuery);
 
-        if ($result->num_rows > 0) {
-            // If the product already exists, update the quantity
-            $updateQuery = "UPDATE `shopping_cart` 
-                            SET `quantity_sp` = `quantity_sp` + '$quantity'
-                            WHERE `id_user` = '$id_user' AND `product_id` = '$product_id'";
+    if ($result->num_rows > 0) {
+        // If the product already exists, update the quantity if it doesn't exceed the product quantity
+        $row = $result->fetch_assoc();
+        $quantity_sp = $row['quantity_sp'];
+        $new_quantity = $quantity_sp + $quantity;
 
-            if ($conn->query($updateQuery) === TRUE) {
-               $_SESSION['success_message'] = "Bạn đã thêm sản phẩm vào giỏ hàng thành công!";
-                header('Location: ../../TrangChu/TrangChu.php');
+        $checkProductQuery = "SELECT `quantity` FROM `product` WHERE `product_id` = '$product_id'";
+        $productResult = $conn->query($checkProductQuery);
+        if ($productResult->num_rows > 0) {
+            $productRow = $productResult->fetch_assoc();
+            $product_quantity = $productRow['quantity'];
+            if ($new_quantity <= $product_quantity) {
+                $updateQuery = "UPDATE `shopping_cart` 
+                                SET `quantity_sp` = '$new_quantity'
+                                WHERE `id_user` = '$id_user' AND `product_id` = '$product_id'";
+                
+                if ($conn->query($updateQuery) === TRUE) {
+                    $_SESSION['success_message'] = "Bạn đã thêm sản phẩm vào giỏ hàng thành công!";
+                    header('Location: ../../TrangChu/TrangChu.php');
+                } else {
+                    $_SESSION['them_sp_thanh_cong'] = false;
+                    
+                    header('Location: ../../TrangChu/TrangChu.php');
+                }
             } else {
+                // Quantity exceeds product quantity
                 $_SESSION['them_sp_thanh_cong'] = false;
-                header('Location: ../../TrangChu/TrangChu.php');
-            }
-        } else {
-            // If the product doesn't exist, insert a new record
-            $insertQuery = "INSERT INTO `shopping_cart`(`id_user`, `product_id`, `quantity_sp`) 
-                            VALUES ('$id_user','$product_id','$quantity')";
-
-            if ($conn->query($insertQuery) === TRUE) {
-               $_SESSION['success_message'] = "Bạn đã thêm sản phẩm vào giỏ hàng thành công!";
-                header('Location: ../../TrangChu/TrangChu.php');
-            } else {
-                $_SESSION['them_sp_thanh_cong'] = false;
+                $_SESSION['error_message'] = "Sản phẩm đã đạt tối đa số lượng trong kho!";
                 header('Location: ../../TrangChu/TrangChu.php');
             }
         }
+    } else {
+        // If the product doesn't exist, insert a new record
+        $insertQuery = "INSERT INTO `shopping_cart`(`id_user`, `product_id`, `quantity_sp`) 
+                        VALUES ('$id_user','$product_id','$quantity')";
+
+        if ($conn->query($insertQuery) === TRUE) {
+            $_SESSION['success_message'] = "Bạn đã thêm sản phẩm vào giỏ hàng thành công!";
+            header('Location: ../../TrangChu/TrangChu.php');
+        } else {
+            $_SESSION['them_sp_thanh_cong'] = false;
+            header('Location: ../../TrangChu/TrangChu.php');
+        }
     }
+}
+
 ?>
 <?php 
     if (isset($_POST['del_order'])) {
@@ -156,44 +174,57 @@ if (isset($_POST['add_one_pro'])) {
         $price = $_POST['price'];
         $quantity_sp = $_POST['quantity'];
         $page = $_POST['trang'];
-        echo $page;
-
+    
         $userInfo = $_SESSION['user_info'];
         $id_user = $userInfo[0];
         $_SESSION['them_sp_thanh_cong'] = true;
-
-        // Check if the product already exists in the shopping cart
-        $checkQuery = "SELECT * FROM `shopping_cart` 
-                       WHERE `id_user` = '$id_user' AND `product_id` = '$product_id'";
-        $result = $conn->query($checkQuery);
-
-        if ($result->num_rows > 0) {
-            // If the product already exists, update the quantity
-            $updateQuery = "UPDATE `shopping_cart` 
-                            SET `quantity_sp` = `quantity_sp` + '$quantity_sp'
-                            WHERE `id_user` = '$id_user' AND `product_id` = '$product_id'";
-
-            if ($conn->query($updateQuery) === TRUE) {
-                 $_SESSION['success_message'] = "Bạn đã thêm sản phẩm vào giỏ hàng thành công!";
-                header("Location: ../../SanPham/SanPham.php?trang=".$page);
+    
+        // Truy vấn để lấy số lượng sản phẩm từ cả hai bảng shopping_cart và product
+        $checkQuantityQuery = "SELECT sc.quantity_sp AS quantity_sp_cart, p.quantity AS quantity_product
+                               FROM shopping_cart AS sc
+                               LEFT JOIN product AS p ON sc.product_id = p.product_id
+                               WHERE sc.id_user = '$id_user' AND sc.product_id = '$product_id'";
+        $quantityResult = $conn->query($checkQuantityQuery);
+    
+        if ($quantityResult->num_rows > 0) {
+            $row = $quantityResult->fetch_assoc();
+            $quantity_sp_cart = $row['quantity_sp_cart'];
+            $quantity_product = $row['quantity_product'];
+    
+            // So sánh số lượng sản phẩm trong giỏ hàng và số lượng từ bảng product
+            if ($quantity_product >= $quantity_sp_cart + $quantity_sp) {
+                // Nếu số lượng sản phẩm từ bảng product đủ, thực hiện thêm vào giỏ hàng
+                $updateQuery = "UPDATE `shopping_cart` 
+                                SET `quantity_sp` = `quantity_sp` + '$quantity_sp'
+                                WHERE `id_user` = '$id_user' AND `product_id` = '$product_id'";
+    
+                if ($conn->query($updateQuery) === TRUE) {
+                    $_SESSION['success_message'] = "Bạn đã thêm sản phẩm vào giỏ hàng thành công!";
+                    header("Location: ../../SanPham/SanPham.php?trang=$page");
+                } else {
+                    $_SESSION['them_sp_thanh_cong'] = false;
+                    header("Location: ../../SanPham/SanPham.php?trang=$page");
+                }
             } else {
-                $_SESSION['them_sp_thanh_cong'] = false;
-                header("Location: ../../SanPham/SanPham.php?trang=".$page);
+                // Hiển thị thông báo cho người dùng nếu số lượng không đủ
+                $_SESSION['error_message'] = "Sản phẩm đã đạt tối đa số lượng trong kho!";
+                header("Location: ../../SanPham/SanPham.php?trang=$page");
             }
         } else {
-            // If the product doesn't exist, insert a new record
+            // Nếu không tìm thấy số lượng sản phẩm trong giỏ hàng, thực hiện thêm mới
             $insertQuery = "INSERT INTO `shopping_cart`(`id_user`, `product_id`, `quantity_sp`) 
                             VALUES ('$id_user','$product_id','$quantity_sp')";
-
+    
             if ($conn->query($insertQuery) === TRUE) {
-                 $_SESSION['success_message'] = "Bạn đã thêm sản phẩm vào giỏ hàng thành công!";
-                header("Location: ../../SanPham/SanPham.php?trang=".$page);
+                $_SESSION['success_message'] = "Bạn đã thêm sản phẩm vào giỏ hàng thành công!";
+                header("Location: ../../SanPham/SanPham.php?trang=$page");
             } else {
                 $_SESSION['them_sp_thanh_cong'] = false;
-                header("Location: ../../SanPham/SanPham.php?trang=".$page);
+                header("Location: ../../SanPham/SanPham.php?trang=$page");
             }
         }
     }
+    
 ?>
 <?php
     if (isset($_POST['detail_pro'])) {

@@ -41,8 +41,7 @@
             background-image: none !important; /* Loại bỏ hình nền */
             background-color: #fff !important; /* Đặt màu nền thành trắng */
         }
-    </style>
-    <style>
+
         .content p {
             font-family: Arial, sans-serif; /* Font chữ */
             font-size: 10px; /* Kích thước chữ */
