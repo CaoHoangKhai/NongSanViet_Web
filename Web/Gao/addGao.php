@@ -7,7 +7,7 @@ $search_name = ""; // Khởi tạo biến lưu trữ $search_name
 if (!isset($_SESSION['user_info'])) {
     // Chuyển hướng người dùng đến trang Đăng Nhập
     $_SESSION['success'] = "Bạn phải Đăng Nhập để thêm được sản phẩm";
-    header('Location: ../../DangNhap/DangNhap.php');
+    header('Location: ../DangNhap/DangNhap.php');
     exit(); // Dừng việc thực thi các lệnh tiếp theo sau lệnh header
 }
 

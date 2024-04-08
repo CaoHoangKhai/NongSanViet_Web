@@ -4,7 +4,7 @@ include "header_admin.php";
 include "sidebar.php";
 
 // Truy vấn để lấy tổng doanh thu theo ngày
-$sql = "SELECT DATE(created) AS ngay, SUM(price) AS doanh_thu FROM order_customer GROUP BY DATE(created)";
+$sql = "SELECT DATE(created) AS ngay, SUM(price) AS doanh_thu FROM order_customer WHERE status <= 3 GROUP BY DATE(created)";
 $result = $conn->query($sql);
 
 // Dữ liệu cho biểu đồ
