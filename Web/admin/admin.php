@@ -105,7 +105,7 @@ if ($result->num_rows > 0) {
                     <div class="container">
                         <div class="row g-2">
                             <div class="col-3" >
-                                <a href="ds_product.php" class="link-dark">
+                                <a href="ds_product.php?trang=1" class="link-dark">
                                 <div class="p-3 border bg-info d-flex justify-content-between align-items-center">
                                     <div class=" text-left text-white fs-5">
                                         <div class=" text-left text-white fs-3"><?php echo $totalProduct;?></div>
@@ -119,7 +119,7 @@ if ($result->num_rows > 0) {
                             </div>
 
                             <div class="col-3">
-                                <a href="ds_user.php" class="link-dark">
+                                <a href="ds_user.php?trang=1" class="link-dark">
                                 <div class="p-3 border bg-info d-flex justify-content-between align-items-center">
                                     <div class=" text-left text-white fs-5">
                                         <div class=" text-left text-white fs-3"><?php echo $totalCustomers;?></div>
@@ -133,7 +133,7 @@ if ($result->num_rows > 0) {
                             </div>
 
                             <div class="col-3">
-                                <a href="ds_feedback.php" class="link-dark">
+                                <a href="ds_feedback.php?trang=1" class="link-dark">
                                 <div class="p-3 border bg-info d-flex justify-content-between align-items-center">
                                     <div class="text-left text-white fs-5">
                                         <div class="text-left text-white fs-3"><?php echo $totalFeedBack; ?></div>
@@ -148,15 +148,17 @@ if ($result->num_rows > 0) {
 
                             
                             <div class="col-3">
-                                <div class="p-3 border bg-info d-flex justify-content-between align-items-center">
-                                    <div class="text-left text-white fs-5">
-                                        <div class="text-left text-white fs-3"><?php echo format_doanhthu($totaldoanhthu);?></div>
-                                        <div>Doanh Thu</div>
+                                <a href="ds_order.php" class="link-dark">
+                                    <div class="p-3 border bg-info d-flex justify-content-between align-items-center">
+                                        <div class="text-left text-white fs-5">
+                                            <div class="text-left text-white fs-3"><?php echo format_doanhthu($totaldoanhthu);?></div>
+                                            <div>Doanh Thu</div>
+                                        </div>
+                                        <div class="text-right" style="margin-right: 20px;">
+                                            <i class="fa fa-bar-chart" style="font-size:80px;"></i>
+                                        </div>
                                     </div>
-                                    <div class="text-right" style="margin-right: 20px;">
-                                        <i class="fa fa-bar-chart" style="font-size:80px;"></i>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
 
                       

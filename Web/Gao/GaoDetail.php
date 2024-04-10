@@ -75,12 +75,20 @@ require '../Chung/php/connect.php';
                     // $quantity = $_SESSION['product']['quantity'];
                     $sql = "SELECT * FROM product p JOIN product_detail pd ON p.product_id=pd.product_id  WHERE p.product_id = '$product_id'";
                     $result = mysqli_query($conn, $sql);
-                    while ($row = mysqli_fetch_array($result)) {
-                ?>
+                    if (mysqli_num_rows($result) == 0) {
+                    ?>
+                        <div class="alert alert-info" role="alert">
+                            Dữ liệu đang chờ cập nhật.
+                        </div>
+                        <?php
+                    }
+                    else {
+                        while ($row = mysqli_fetch_array($result)) {
+                    ?>
                 <span>
                     <a  class="link-dark" href="../TrangChu/TrangChu.php">TRANG CHỦ</a>
                     <a>/</a>
-                    <a  class="link-dark" href="../SanPham/SanPham.php">SẢN PHẨM</a>
+                    <a  class="link-dark" href="../SanPham/SanPham.php?trang=1">SẢN PHẨM</a>
                     <a>/</a>
                     <a>CHI TIÊT SẢN PHẨM</a>
                 </span>
@@ -109,6 +117,7 @@ require '../Chung/php/connect.php';
                     </div>
                     <div class="d-flex justify-content-between mt-3"> 
                         <form action="addGao.php" method="post">
+                            
                             <input type="hidden" name="product_id" value="<?php echo $row['product_id'] ?>">
                             <input type="hidden" name="image" value="<?php echo $row['image'] ?>">
                             <input type="hidden" name="product_name" value="<?php echo $row['product_name'] ?>">
@@ -125,6 +134,7 @@ require '../Chung/php/connect.php';
                 </div>
                 
             <?php
+                        }
                 }
             ?>
         

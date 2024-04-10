@@ -4,24 +4,39 @@ include "header_admin.php";
 include "sidebar.php";
 ?>
 <?php
-
 if (isset($_POST['add'])) {
     $product_name = $_POST['product_name'];
     $type = $_POST['type'];
-    $image = $_POST['image'];
     $price = $_POST['price'];
 
+    // Kiểm tra xem trường 'image' đã được gửi và không trống
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $image = $_FILES['image']['name'];
 
-    if (!empty($product_name) && !empty($type) && !empty($image) && !empty($price)) {
+        // Move uploaded file to desired location
+        $uploadDir = "../../Data/Gao/" . $type . "/";
+        $uploadFile = $uploadDir . basename($image);
 
-        // Kiểm tra xem tên sản phẩm đã tồn tại trong cơ sở dữ liệu hay chưa
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        if (!move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
+            echo "<script>alert('Đã xảy ra lỗi khi tải lên hình ảnh.');</script>";
+            exit;
+        }
+    } else {
+        echo "<script>alert('Vui lòng chọn hình ảnh cho sản phẩm.');</script>";
+        exit;
+    }
+
+    if (!empty($product_name) && !empty($type) && !empty($price)) {
         $checkProductNamelQuery = "SELECT * FROM `product` WHERE `product_name` = '$product_name'";
         $checkProductNameResult = $conn->query($checkProductNamelQuery);
 
         if ($checkProductNameResult->num_rows > 0) {
             echo "<script>alert('Tên Sản Phẩm đã được dùng. Vui lòng chọn sản phẩm khác')</script>";
         } else {
-            // Thêm dữ liệu vào cơ sở dữ liệu
             $insertQuery = "INSERT INTO `product` (`product_name`, `type`, `image`, `price`) 
                 VALUES ('$product_name', '$type', '$image', '$price')";
 

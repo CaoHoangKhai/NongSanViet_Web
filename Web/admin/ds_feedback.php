@@ -90,7 +90,7 @@ include "sidebar.php";
                                         </form>
                                         <script>
                                             function confirmDelete() {
-                                                return confirm("Bạn có chắc chắn muốn xóa PHẢN HỒI này?");
+                                                return confirm("Bạn đã xử lý PHẢN HỒI này?");
                                             }
                                         </script>
                                     </td>
@@ -124,7 +124,9 @@ include "sidebar.php";
                             <?php
                             }
                             ?>
-
+                            <?php 
+                                if($trang == 0) $trang=1; 
+                            ?>
                             <li class="page-item">
                                 <a class="page-link" href="ds_feedback.php?trang=<?php echo $trang ?>" aria-label="Next">
                                     <span aria-hidden="true" name="last">&raquo;</span>
