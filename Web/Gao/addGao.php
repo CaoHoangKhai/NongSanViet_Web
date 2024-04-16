@@ -12,72 +12,45 @@ if (!isset($_SESSION['user_info'])) {
 }
 
 // Hàm này sẽ thêm sản phẩm vào giỏ hàng cho từng loại gạo
+
 function addToCart($conn, $product_id, $quantity, $redirect_page, $search_name) {
     $userInfo = $_SESSION['user_info'];
     $id_user = $userInfo[0];
     $_SESSION['them_sp_thanh_cong'] = true;
 
-    // Truy vấn SQL để lấy quantity của sản phẩm từ bảng product
-    $productQuery = "SELECT `quantity` FROM `product` WHERE `product_id` = '$product_id'";
-    $productResult = $conn->query($productQuery);
+    // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng của người dùng hay chưa
+    $checkQuery = "SELECT * FROM `shopping_cart` 
+                   WHERE `id_user` = '$id_user' AND `product_id` = '$product_id'";
+    $result = $conn->query($checkQuery);
 
-    if ($productResult->num_rows > 0) {
-        $productRow = $productResult->fetch_assoc();
-        $product_quantity = $productRow['quantity'];
-        
-        // Kiểm tra xem số lượng sản phẩm trong giỏ hàng của người dùng đã đạt tối đa hay chưa
-        $shoppingCartQuery = "SELECT `quantity_sp` FROM `shopping_cart` 
-                              WHERE `id_user` = '$id_user' AND `product_id` = '$product_id'";
-        $shoppingCartResult = $conn->query($shoppingCartQuery);
+    if ($result->num_rows > 0) {
+        // Nếu sản phẩm đã tồn tại, cập nhật số lượng
+        $updateQuery = "UPDATE `shopping_cart` 
+                        SET `quantity_sp` = `quantity_sp` + '$quantity'
+                        WHERE `id_user` = '$id_user' AND `product_id` = '$product_id'";
 
-        $total_quantity_in_cart = 0;
-        while ($row = $shoppingCartResult->fetch_assoc()) {
-            $total_quantity_in_cart += $row['quantity_sp'];
-        }
-
-        $remaining_quantity = $product_quantity - $total_quantity_in_cart;
-        
-        if ($quantity <= $remaining_quantity) {
-            // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng của người dùng hay chưa
-            $checkQuery = "SELECT * FROM `shopping_cart` 
-                           WHERE `id_user` = '$id_user' AND `product_id` = '$product_id'";
-            $result = $conn->query($checkQuery);
-
-            if ($result->num_rows > 0) {
-                // Nếu sản phẩm đã tồn tại, cập nhật số lượng
-                $updateQuery = "UPDATE `shopping_cart` 
-                                SET `quantity_sp` = `quantity_sp` + '$quantity'
-                                WHERE `id_user` = '$id_user' AND `product_id` = '$product_id'";
-
-                if ($conn->query($updateQuery) === TRUE) {
-                    $_SESSION['success_message'] = "Bạn đã thêm sản phẩm vào giỏ hàng thành công!";
-                    header("Location: $redirect_page?search_name=$search_name"); // Chuyển hướng với $search_name
-                } else {
-                    $_SESSION['them_sp_thanh_cong'] = false;
-                    header("Location: $redirect_page");
-                }
-            } else {
-                // Nếu sản phẩm chưa tồn tại, thêm bản ghi mới
-                $insertQuery = "INSERT INTO `shopping_cart`(`id_user`, `product_id`, `quantity_sp`) 
-                                VALUES ('$id_user','$product_id','$quantity')";
-
-                if ($conn->query($insertQuery) === TRUE) {
-                    $_SESSION['success_message'] = "Bạn đã thêm sản phẩm vào giỏ hàng thành công!";
-                    header("Location: $redirect_page?search_name=$search_name"); // Chuyển hướng với $search_name
-                } else {
-                    $_SESSION['them_sp_thanh_cong'] = false;
-                    header("Location: $redirect_page");
-                }
-            }
+        if ($conn->query($updateQuery) === TRUE) {
+            $_SESSION['success_message'] = "Bạn đã thêm sản phẩm vào giỏ hàng thành công!";
+            header("Location: $redirect_page?search_name=$search_name"); // Chuyển hướng với $search_name
         } else {
-            $_SESSION['error_message'] = "Sản phẩm đã đạt tối đa số lượng trong kho!";
+            $_SESSION['them_sp_thanh_cong'] = false;
             header("Location: $redirect_page");
         }
     } else {
-        $_SESSION['error_message'] = "Sản phẩm không tồn tại!";
-        header("Location: $redirect_page");
+        // Nếu sản phẩm chưa tồn tại, thêm bản ghi mới
+        $insertQuery = "INSERT INTO `shopping_cart`(`id_user`, `product_id`, `quantity_sp`) 
+                        VALUES ('$id_user','$product_id','$quantity')";
+
+        if ($conn->query($insertQuery) === TRUE) {
+            $_SESSION['success_message'] = "Bạn đã thêm sản phẩm vào giỏ hàng thành công!";
+            header("Location: $redirect_page?search_name=$search_name"); // Chuyển hướng với $search_name
+        } else {
+            $_SESSION['them_sp_thanh_cong'] = false;
+            header("Location: $redirect_page");
+        }
     }
 }
+
 
 
 // Gạo Dẻo Thơm

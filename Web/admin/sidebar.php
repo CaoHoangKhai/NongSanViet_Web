@@ -29,7 +29,7 @@
             <a href="ds_feedback.php?trang=1">
                 <i class="fa fa-comments fa-2x" aria-hidden="true"></i>
                 <span class="nav-text">
-                    Danh Sách Phản Hồi
+                    Danh Sách Liên Hệ
                 </span>
             </a>
         </li>

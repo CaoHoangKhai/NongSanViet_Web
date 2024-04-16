@@ -95,7 +95,7 @@ if(isset($_SESSION['user_info']) && !empty($_SESSION['user_info'])) {
                 $counter = 1;
 
                 while ($row = mysqli_fetch_array($result)) {
-                    if($row['quantity'] > 0){
+                    
                 ?>
                 
                 <div class="col-md-3 mb-4 product-item">
@@ -107,9 +107,7 @@ if(isset($_SESSION['user_info']) && !empty($_SESSION['user_info'])) {
                             <div class="col-auto mr-auto">
                                 <div class="mt-2 red-price"><?php echo number_format($row['price'], 0, ',', '.') ?> &#8363;</div>
                             </div>
-                            <div class="col-auto">
-                                <div class="mt-2 ">Đã bán: <?php echo $row['sold'];?> </div>
-                            </div>
+                           
                         </div>
                         
                         <div class="d-flex justify-content-between mt-3"> 
@@ -133,7 +131,7 @@ if(isset($_SESSION['user_info']) && !empty($_SESSION['user_info'])) {
                 </div>
 
                 <?php
-                    }
+                    
                 }
                 ?>
 

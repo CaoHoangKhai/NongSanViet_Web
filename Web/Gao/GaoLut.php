@@ -71,7 +71,7 @@ require '../Chung/php/connect.php';
                 $counter = 1;
 
                 while ($row = mysqli_fetch_array($result)) {
-                    if($row['quantity'] > 0){
+                    
 
                     
                 ?>
@@ -84,9 +84,6 @@ require '../Chung/php/connect.php';
                         <div class="row">
                             <div class="col-auto mr-auto">
                                 <div class="mt-2 red-price fs-5"><?php echo number_format($row['price'], 0, ',', '.') ?> &#8363;</div>
-                            </div>
-                            <div class="col-auto">
-                                <div class="mt-2">Đã bán: <?php echo $row['sold'];?> </div>
                             </div>
                         </div>
                         
@@ -109,7 +106,7 @@ require '../Chung/php/connect.php';
 
                 <?php
                     }
-                }
+                
                 ?>
         </div>
     </main>

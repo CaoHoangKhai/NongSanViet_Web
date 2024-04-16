@@ -5,27 +5,28 @@ include 'connect.php';
 <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if(isset($_POST['contact'])) {
-        $username = $_POST['username'];
-        $phonenumber = $_POST['phonenumber'];
-        $email = $_POST['email'];
-        $address = $_POST['address'];
-        $note = $_POST['note'];
-        
-            // echo "Thời gian được gửi từ form: " .  $created;
-        $query = "INSERT INTO `feed_back`(`username`, `phonenumber`, `email`, `address`, `note`)
-        VALUES ('$username', '$phonenumber', '$email', '$address', '$note')";
-        if ($conn->query($query) === TRUE) {
-            $_SESSION['success'] = "THÔNG TIN ĐÃ ĐƯỢC GỬI ĐI. VUI LÒNG ĐỢI ÍT PHÚT";
+            $username = $_POST['username'];
+            $phonenumber = $_POST['phonenumber'];
+            $email = $_POST['email'];
+            $address = $_POST['address'];
+            $note = $_POST['note'];
             
-            header('Location: ../../LienHe/LienHe.php');
-        }else {
-            $_SESSION['success'] = "Thông tin gửi đi THẤT BẠI. VUI LÒNG KIỂM TRA LẠI THÔNG TIN";
-            header('Location: ../../LienHe/LienHe.php');
-        }
-        }
+            // Kiểm tra xem biến id_user có tồn tại không, nếu không, gán giá trị là 0
+            $id_user = isset($_SESSION['user_info'][0]) ? $_SESSION['user_info'][0] : 1;
 
+            $query = "INSERT INTO `lienhe`(`id_user`,`username`, `phonenumber`, `email`, `address`, `note`)
+            VALUES ('$id_user','$username', '$phonenumber', '$email', '$address', '$note')";
+            if ($conn->query($query) === TRUE) {
+                $_SESSION['success'] = "THÔNG TIN ĐÃ ĐƯỢC GỬI ĐI. VUI LÒNG ĐỢI ÍT PHÚT";
+                header('Location: ../../LienHe/LienHe.php');
+            } else {
+                $_SESSION['error'] = "Thông tin gửi đi THẤT BẠI. VUI LÒNG KIỂM TRA LẠI THÔNG TIN";
+                header('Location: ../../LienHe/LienHe.php');
+            }
+        }
     }
 ?>
+
 <?php
 if (isset($_POST['update_user'])) {
     $id = $_POST['edit_id'];

@@ -27,37 +27,23 @@ if (!isset($_SESSION['user_info'])) {
     $result = $conn->query($checkQuery);
 
     if ($result->num_rows > 0) {
-        // If the product already exists, update the quantity if it doesn't exceed the product quantity
-        $row = $result->fetch_assoc();
-        $quantity_sp = $row['quantity_sp'];
-        $new_quantity = $quantity_sp + $quantity;
+    // If the product already exists, update the quantity
+    $row = $result->fetch_assoc();
+    $quantity_sp = $row['quantity_sp'];
+    $new_quantity = $quantity_sp + $quantity;
 
-        $checkProductQuery = "SELECT `quantity` FROM `product` WHERE `product_id` = '$product_id'";
-        $productResult = $conn->query($checkProductQuery);
-        if ($productResult->num_rows > 0) {
-            $productRow = $productResult->fetch_assoc();
-            $product_quantity = $productRow['quantity'];
-            if ($new_quantity <= $product_quantity) {
-                $updateQuery = "UPDATE `shopping_cart` 
-                                SET `quantity_sp` = '$new_quantity'
-                                WHERE `id_user` = '$id_user' AND `product_id` = '$product_id'";
+    $updateQuery = "UPDATE `shopping_cart` 
+                    SET `quantity_sp` = '$new_quantity'
+                    WHERE `id_user` = '$id_user' AND `product_id` = '$product_id'";
                 
-                if ($conn->query($updateQuery) === TRUE) {
-                    $_SESSION['success_message'] = "Bạn đã thêm sản phẩm vào giỏ hàng thành công!";
-                    header('Location: ../../TrangChu/TrangChu.php');
-                } else {
-                    $_SESSION['them_sp_thanh_cong'] = false;
-                    
-                    header('Location: ../../TrangChu/TrangChu.php');
-                }
-            } else {
-                // Quantity exceeds product quantity
-                $_SESSION['them_sp_thanh_cong'] = false;
-                $_SESSION['error_message'] = "Sản phẩm đã đạt tối đa số lượng trong kho!";
-                header('Location: ../../TrangChu/TrangChu.php');
-            }
-        }
+    if ($conn->query($updateQuery) === TRUE) {
+        $_SESSION['success_message'] = "Bạn đã thêm sản phẩm vào giỏ hàng thành công!";
     } else {
+        $_SESSION['them_sp_thanh_cong'] = false;
+    }
+
+    header('Location: ../../TrangChu/TrangChu.php');
+} else {
         // If the product doesn't exist, insert a new record
         $insertQuery = "INSERT INTO `shopping_cart`(`id_user`, `product_id`, `quantity_sp`) 
                         VALUES ('$id_user','$product_id','$quantity')";
@@ -137,33 +123,22 @@ if (isset($_POST['add_one_pro'])) {
     $row_cart = mysqli_fetch_assoc($result_cart);
     $quantity_in_cart = $row_cart['quantity_sp'];
 
-    // Lấy quantity của sản phẩm từ bảng product
-    $query_product = "SELECT quantity FROM product WHERE product_id = '$product_id'";
-    $result_product = mysqli_query($conn, $query_product);
-    $row_product = mysqli_fetch_assoc($result_product);
-    $quantity_product = $row_product['quantity'];
+    // Tăng quantity lên 1
+    $quantity_in_cart += 1;
 
-    // Kiểm tra nếu quantity trong giỏ hàng nhỏ hơn hoặc bằng quantity của sản phẩm
-    if ($quantity_in_cart < $quantity_product) {
-        // Tăng quantity lên 1
-        $quantity_in_cart += 1;
-
-        // Thực hiện cập nhật quantity trong giỏ hàng
-        $query_update = "UPDATE shopping_cart SET quantity_sp = '$quantity_in_cart' WHERE id_user = '$id_user' AND product_id = '$product_id'";
-        $query_run = mysqli_query($conn, $query_update);
-        if ($query_run) {
-            header('Location: ../../GioHang/GioHang.php');
-            exit(); // Kết thúc luồng xử lý sau khi chuyển hướng
-        } else {
-            $_SESSION['error'] = "Có lỗi xảy ra khi cập nhật giỏ hàng.";
-            header('Location: ../../GioHang/GioHang.php');
-        }
+    // Thực hiện cập nhật quantity trong giỏ hàng
+    $query_update = "UPDATE shopping_cart SET quantity_sp = '$quantity_in_cart' WHERE id_user = '$id_user' AND product_id = '$product_id'";
+    $query_run = mysqli_query($conn, $query_update);
+    if ($query_run) {
+        header('Location: ../../GioHang/GioHang.php');
+        exit(); // Kết thúc luồng xử lý sau khi chuyển hướng
     } else {
-        $_SESSION['error'] = "Sản phẩm đã đạt tối đa số lượng trong kho.";
+        $_SESSION['error'] = "Có lỗi xảy ra khi cập nhật giỏ hàng.";
         header('Location: ../../GioHang/GioHang.php');
     }
 }
 ?>
+
 
 <?php
     if (isset($_POST['sp_addtocart'])) {
@@ -179,39 +154,30 @@ if (isset($_POST['add_one_pro'])) {
         $id_user = $userInfo[0];
         $_SESSION['them_sp_thanh_cong'] = true;
     
-        // Truy vấn để lấy số lượng sản phẩm từ cả hai bảng shopping_cart và product
-        $checkQuantityQuery = "SELECT sc.quantity_sp AS quantity_sp_cart, p.quantity AS quantity_product
-                               FROM shopping_cart AS sc
-                               LEFT JOIN product AS p ON sc.product_id = p.product_id
-                               WHERE sc.id_user = '$id_user' AND sc.product_id = '$product_id'";
+        // Truy vấn để lấy số lượng sản phẩm từ bảng shopping_cart
+        $checkQuantityQuery = "SELECT `quantity_sp` 
+                               FROM `shopping_cart`
+                               WHERE `id_user` = '$id_user' AND `product_id` = '$product_id'";
         $quantityResult = $conn->query($checkQuantityQuery);
     
         if ($quantityResult->num_rows > 0) {
             $row = $quantityResult->fetch_assoc();
-            $quantity_sp_cart = $row['quantity_sp_cart'];
-            $quantity_product = $row['quantity_product'];
+            $quantity_sp_cart = $row['quantity_sp'];
     
-            // So sánh số lượng sản phẩm trong giỏ hàng và số lượng từ bảng product
-            if ($quantity_product >= $quantity_sp_cart + $quantity_sp) {
-                // Nếu số lượng sản phẩm từ bảng product đủ, thực hiện thêm vào giỏ hàng
-                $updateQuery = "UPDATE `shopping_cart` 
-                                SET `quantity_sp` = `quantity_sp` + '$quantity_sp'
-                                WHERE `id_user` = '$id_user' AND `product_id` = '$product_id'";
+            // Thực hiện cập nhật số lượng sản phẩm trong giỏ hàng
+            $updateQuery = "UPDATE `shopping_cart` 
+                            SET `quantity_sp` = `quantity_sp` + '$quantity_sp'
+                            WHERE `id_user` = '$id_user' AND `product_id` = '$product_id'";
     
-                if ($conn->query($updateQuery) === TRUE) {
-                    $_SESSION['success_message'] = "Bạn đã thêm sản phẩm vào giỏ hàng thành công!";
-                    header("Location: ../../SanPham/SanPham.php?trang=$page");
-                } else {
-                    $_SESSION['them_sp_thanh_cong'] = false;
-                    header("Location: ../../SanPham/SanPham.php?trang=$page");
-                }
+            if ($conn->query($updateQuery) === TRUE) {
+                $_SESSION['success_message'] = "Bạn đã thêm sản phẩm vào giỏ hàng thành công!";
+                header("Location: ../../SanPham/SanPham.php?trang=$page");
             } else {
-                // Hiển thị thông báo cho người dùng nếu số lượng không đủ
-                $_SESSION['error_message'] = "Sản phẩm đã đạt tối đa số lượng trong kho!";
+                $_SESSION['them_sp_thanh_cong'] = false;
                 header("Location: ../../SanPham/SanPham.php?trang=$page");
             }
         } else {
-            // Nếu không tìm thấy số lượng sản phẩm trong giỏ hàng, thực hiện thêm mới
+            // Nếu không tìm thấy sản phẩm trong giỏ hàng, thêm mới vào
             $insertQuery = "INSERT INTO `shopping_cart`(`id_user`, `product_id`, `quantity_sp`) 
                             VALUES ('$id_user','$product_id','$quantity_sp')";
     
@@ -224,6 +190,32 @@ if (isset($_POST['add_one_pro'])) {
             }
         }
     }
+?>
+
+<?php
+    if (isset($_POST['update_quantity'])) {
+
+        $product_id = $_POST['product_id'];
+        $quantity = $_POST['quantity_sp'];
+        $userInfo = $_SESSION['user_info'];
+        $id_user = $userInfo[0];
+        // Kiểm tra số lượng nhập vào có hợp lệ không
+        if (!is_numeric($quantity)) {
+            $_SESSION['error'] = "Số lượng không hợp lệ.";
+            header('Location: ../../GioHang/GioHang.php');
+            exit();
+        }
+        $query_update ="UPDATE shopping_cart SET quantity_sp = '$quantity' WHERE product_id = '$product_id' AND id_user = '$id_user'";
+        $query_run = mysqli_query($conn, $query_update);
+        if ($query_run) {
+            header('Location: ../../GioHang/GioHang.php');
+            exit(); // Kết thúc luồng xử lý sau khi chuyển hướng
+        } else {
+            $_SESSION['error'] = "Có lỗi xảy ra khi cập nhật giỏ hàng.";
+            header('Location: ../../GioHang/GioHang.php');
+        }
+    }
+
     
 ?>
 <?php

@@ -43,19 +43,27 @@ if (isset($_POST['update_user'])) {
 ?>
 
 <?php
-    if (isset($_POST['del_user'])) {
-        $id = $_POST['del_id'];
-        $trang = $_POST['trang'];
-        $sql = "DELETE  FROM customer WHERE id_user='$id'";
-        $query_run = mysqli_query($conn,$sql);
-        if($query_run){
-            $_SESSION['success'] = "Dữ liệu đã được xóa";
-            header('Location: ds_user.php?trang='.$trang);
-        }else{
-            $_SESSION['success'] = "Dữ liệu xóa thất bại. VUI LÒNG KIỂM TRA LẠI THÔNG TIN";
-            header('Location: ds_user.php?trang='.$trang);
-        }
+if (isset($_POST['del_user'])) {
+    // Lấy thông tin từ biến POST
+    $id = $_POST['del_id'];
+    $trang = $_POST['trang'];
+
+    // Cập nhật trạng thái của bản ghi trong bảng customer
+    $sql_update_customer = "UPDATE customer SET status = 1 WHERE id_user = '$id'";
+    $result_update_customer = mysqli_query($conn, $sql_update_customer);
+
+    if ($result_update_customer) {
+        // Nếu cập nhật thành công, thiết lập thông báo thành công
+        $_SESSION['success'] = "Dữ liệu đã được xóa";
+    } else {
+        // Nếu cập nhật không thành công, thiết lập thông báo lỗi
+        $_SESSION['error'] = "Dữ liệu xóa thất bại. VUI LÒNG KIỂM TRA LẠI THÔNG TIN";
     }
+
+    // Chuyển hướng người dùng đến trang danh sách người dùng
+    header('Location: ds_user.php?trang='.$trang);
+    exit; // Kết thúc kịch bản sau khi chuyển hướng
+}
 ?>
     
 <?php
@@ -63,7 +71,7 @@ if (isset($_POST['update_product'])) {
     $id = $_POST['edit_id'];
     $product_name = $_POST['edit_product_name'];
     $type = $_POST['edit_type'];
-    $quantity = $_POST['edit_quantity'];
+
     $page = $_POST['trang'];
     // Kiểm tra nếu 'edit_image' rỗng, lấy giá trị từ 'edit_image_'.
     $image = empty($_POST['edit_image']) ? $_POST['edit_image_'] : $_POST['edit_image'];
@@ -78,7 +86,7 @@ if (isset($_POST['update_product'])) {
         header('Location: ds_product.php?trang='.$page);
     } else {
         // Tiến hành cập nhật nếu tên sản phẩm không bị trùng
-        $query = "UPDATE product SET product_name='$product_name', type ='$type', image='$image', price ='$price ', quantity ='$quantity' WHERE product_id = '$id'";
+        $query = "UPDATE product SET product_name='$product_name', type ='$type', image='$image', price ='$price ' WHERE product_id = '$id'";
         $query_run = mysqli_query($conn, $query);
 
         if ($query_run) {
@@ -111,7 +119,7 @@ if (isset($_POST['update_product'])) {
     if (isset($_POST['del_idpb'])) {
         $id = $_POST['id'];
         $page=$_POST['trang'];
-        $sql = "DELETE  FROM feed_back WHERE id='$id'";
+        $sql = "DELETE  FROM lienhe WHERE id='$id'";
         $query_run = mysqli_query($conn,$sql);
         if($query_run){
             $_SESSION['success'] = "THÔNG TIN ĐÃ ĐƯỢC XỬ LÝ";

@@ -61,14 +61,7 @@
         
     </head>
     <body>
-    <style>
-        body {
-            background-image: url("../../Data/BackGround/bottom.jpg");
-            background-color: rgba(255, 255, 255, 0); /* Điều chỉnh giá trị alpha (0 đến 1) để làm mờ hình ảnh */
-            background-repeat: repeat; 
-            background-size: auto;/*  Đảm bảo hình nền kích thước phù hợp với kích thước cửa sổ trình duyệt */
-        }
-    </style>
+    
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark"data-bs-theme="dark">
             <!-- Tên sản phẩm ở góc trái -->
             <a class="navbar-brand fs-2" href="../../../../WEB_BAN_HANG/Web/TrangChu/TrangChu.php" style="font-family:'Bungee Shade'">NÔNG SẢN VIỆT</a>

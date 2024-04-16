@@ -22,11 +22,11 @@ if (isset($_POST['add'])) {
         }
 
         if (!move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
-            echo "<script>alert('Đã xảy ra lỗi khi tải lên hình ảnh.');</script>";
+            $_SESSION['success']="Đã xảy ra lỗi khi tải lên hình ảnh.";
             exit;
         }
     } else {
-        echo "<script>alert('Vui lòng chọn hình ảnh cho sản phẩm.');</script>";
+        $_SESSION['success']="Vui lòng chọn hình ảnh cho sản phẩm.";
         exit;
     }
 
@@ -41,7 +41,7 @@ if (isset($_POST['add'])) {
                 VALUES ('$product_name', '$type', '$image', '$price')";
 
             if ($conn->query($insertQuery) === TRUE) {
-                echo "<script>alert('Thêm thành công')</script>";
+                echo $_SESSION['success']="Thêm Sản Phẩm Thành Công";
             } else {
                 echo "Lỗi: " . $insertQuery . "<br>" . $conn->error;
             }
@@ -99,15 +99,15 @@ if (isset($_POST['add'])) {
                         <div class="modal-body">
                             <form class="row g-3 needs-validation" action="" method="post" enctype="multipart/form-data" novalidate>
                                 <div class="col-md-6">
-                                    <label class="form-label fs-6"><strong>Tên Sản Phẩm</strong></label>
-                                    <input type="text" class="form-control" name="product_name" placeholder="Tên sản phẩm" autofocus required>
+                                    <label class="form-label fs-6"><strong>Nhập Tên Sản Phẩm</strong></label>
+                                    <input type="text" class="form-control" name="product_name" placeholder="Nhập Tên sản phẩm" autofocus required>
                                     <div class="invalid-feedback">
                                         Tên Sản Phẩm không được bỏ trống.
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label class="form-label fs-6"><strong>Loại Sản Phẩm</strong></label>
+                                    <label class="form-label fs-6"><strong>Nhập Loại Sản Phẩm</strong></label>
                                     <select class="form-select form-control" id="inputGroupSelect01" name="type" required>
                                         <option selected disabled value="">Chọn loại sản phẩm</option>
                                         <option value="Gao_Dac_San">Gạo Đặc Sản</option>
@@ -130,7 +130,7 @@ if (isset($_POST['add'])) {
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="autoSizingInputGroup" class="form-label fs-6"><strong>Chọn giá tiền cho sản phẩm</strong></label>
+                                    <label for="autoSizingInputGroup" class="form-label fs-6"><strong>Nhập Giá Tiền Cho Sản Phẩm</strong></label>
                                     <div class="input-group">
                                         <input type="number" class="form-control" id="autoSizingInputGroup" placeholder="Chọn giá tiền cho sản phẩm" name="price" required>
                                         <div class="input-group-text">₫</div>
@@ -181,14 +181,13 @@ if (isset($_POST['add'])) {
                         </thead> -->
                         <thead>
                         <tr>
-                            <th scope="col"class="col-0.5">STT</th>
+                            <th scope="col"class="col-1">STT</th>
                             <th scope="col"class="col-2">Tên sản phẩm</th>
-                            <th scope="col"class="col-2">Hình Ảnh</th>
-                            <th scope="col"class="col-0.5">Tồn Kho</th>
-                            <th scope="col"class="col-0.5">Đã Bán</th>
-                            <th scope="col"class="col-2">Giá</th>
-                            <th scope="col"class="col-0.5">Sửa</th>
-                            <th scope="col"class="col-0.5">Xóa</th>
+                            <th scope="col"class="col-4">Hình Ảnh</th>
+
+                            <th scope="col"class="col-3">Giá</th>
+                            <th scope="col"class="col-1">Sửa</th>
+                            <th scope="col"class="col-1">Xóa</th>
 
                         </tr>
                     </thead>
@@ -216,8 +215,7 @@ if (isset($_POST['add'])) {
                                     <td><?php echo $counter; ?></td>
                                     <td><?php echo $row['product_name'] ?></td>
                                     <td><img src="../../Data/Gao/<?php echo $row['type'] . '/'; ?><?php echo $row['image'] ?>" style="width: 100px; height: 80px;"></td>
-                                    <td><?php echo $row['quantity'] ?></td>
-                                    <td ><?php echo $row['sold'] ?></td>
+                                    
                                     <td><b><?php echo  number_format($row['price'], 0, ',', '.') ?> VND</b></td>
                                     <td>
                                         <form action="edit_product.php" method="post">

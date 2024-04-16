@@ -145,6 +145,9 @@ include "sidebar.php";
                         }
                         ?>
                         <li class="page-item">
+                            <?php 
+                                if($trang == 0) $trang =1;
+                            ?>
                             <a class="page-link" href="ds_order.php?trang=<?php echo $trang ?>" aria-label="Next">
                                 <span aria-hidden="true" name="last">&raquo;</span>
                             </a>

@@ -81,7 +81,7 @@ if ($result->num_rows > 0) {
                     $row =  $kq_p->fetch_assoc();
                     $totalProduct = $row['total_p'];
                     //Feedback
-                    $count_feedback = "SELECT COUNT(*) as total_fb FROM feed_back";
+                    $count_feedback = "SELECT COUNT(*) as total_fb FROM lienhe";
                     $kq_fb = $conn->query($count_feedback);
                     $row =  $kq_fb->fetch_assoc();
                     $totalFeedBack = $row['total_fb'];

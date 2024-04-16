@@ -48,7 +48,7 @@ include "sidebar.php";
                                 <th scope="col"class="col-0.5">STT</th>
                                 <th scope="col"class="col-1.5">Họ tên</th>
                                 <th scope="col"class="col-0.5">Điện Thoại</th>
-                                <th scope="col"class="col-0.5">Email</th>
+                                <!-- <th scope="col"class="col-0.5">Email</th> -->
 
                                 <th scope="col"class="col-0.5">Địa Chỉ</th>
                                 <th scope="col-1"class="col-3.5">Ghi Chú</th>
@@ -68,7 +68,7 @@ include "sidebar.php";
                             }else {
                                 $begin = ($page*4)-4;
                             }
-                            $sql = "SELECT * FROM feed_back ORDER BY created DESC LIMIT $begin,4";
+                            $sql = "SELECT * FROM lienhe ORDER BY created DESC LIMIT $begin,4";
                             $result = mysqli_query($conn, $sql);
                             $counter = 1;
 
@@ -78,7 +78,7 @@ include "sidebar.php";
                                     <td><?php echo $counter; ?></td>
                                     <td><?php echo $row['username'] ?></td>
                                     <td><?php echo $row['phonenumber'] ?></td>
-                                    <td><?php echo $row['email'] ?></td>
+                                    
                                     <td><?php echo $row['address'] ?></td>
                                     <td><?php echo $row['note'] ?></td>
                                     <td><?php echo $row['created'] ?></td>
@@ -102,7 +102,7 @@ include "sidebar.php";
                             }
                             ?>
                             <?php
-                                $count = "SELECT COUNT(*) as total FROM feed_back";
+                                $count = "SELECT COUNT(*) as total FROM lienhe";
                                 $kq = $conn->query($count);
                                 $row = $kq->fetch_assoc();
                                 $totalProduct= $row['total'];

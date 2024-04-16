@@ -310,6 +310,7 @@ if (isset($_POST['save'])) {
                             $districtCode = $row['district']; // Thay 'districts' bằng tên cột chứa mã quận huyện trong bảng customer
                             $cityName = getCityName($cityCode);
                             $districtName = getDistrictName($cityCode, $districtCode);
+                            if ($row['status'] == 0){
                         ?>
                             <tr>
                                 <td><?php echo $counter; ?></td>
@@ -338,6 +339,7 @@ if (isset($_POST['save'])) {
                         <?php
                             // Increment the counter for the next row
                             $counter++;
+                            }
                         } 
                         ?>
                         <?php
@@ -364,6 +366,9 @@ if (isset($_POST['save'])) {
                         }
                         ?>
                         <li class="page-item">
+                            <?php 
+                                if($trang == 0) $trang =1;
+                            ?>
                             <a class="page-link" href="ds_user.php?trang=<?php echo $trang ?>" aria-label="Next">
                                 <span aria-hidden="true" name="last">&raquo;</span>
                             </a>

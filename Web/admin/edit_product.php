@@ -74,13 +74,12 @@ include "sidebar.php";
                                         <div class="input-group-text">&#8363;</div>
                                     </div>
                                 </div>
-
-                                <div class="col-md-2">
-                                    <label for="formFile" class="form-label fs-6"><strong>Tồn kho</strong></label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Sản phẩm còn trong kho" name="edit_quantity" value="<?php echo $row['quantity']?>">
-                                    </div>
+                                
+                                <div class="col-md-6 mt-3">
+                                    <a href="ds_product.php" class="btn btn-danger">Cancel</a>
+                                    <button type="submit" class="btn btn-primary" name="update_product" value="Cập nhật">Update</button>
                                 </div>
+                                
 
                                 <div class="col-md-6">
                                     <label for="formFile" class="form-label fs-6"><strong>Chọn hình ảnh của sản phẩm</strong></label>
@@ -96,10 +95,7 @@ include "sidebar.php";
                                     
                                 </div>
                                 
-                                <div class="col-md-6 mt-3">
-                                    <a href="ds_product.php" class="btn btn-danger">Cancel</a>
-                                    <button type="submit" class="btn btn-primary" name="update_product" value="Cập nhật">Update</button>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

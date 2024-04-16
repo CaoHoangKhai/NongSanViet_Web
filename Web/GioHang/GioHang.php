@@ -52,12 +52,6 @@ include '../Chung/php/connect.php';
     <main>
         <div class="container">
             <div class="row">
-            <style>
-                body {
-                    background-image: url("../../Data/BackGround/bottom.jpg");
-                    background-color: rgba(255, 255, 255, 0.7); /* Điều chỉnh giá trị alpha 0->1 để làm mờ hình ảnh */
-                }
-            </style>
                 <?php
                     // Check if the user is logged in again to avoid displaying content when not logged in
                     if (isset($_SESSION['user_info']) && !empty($_SESSION['user_info'])) {
@@ -89,10 +83,10 @@ include '../Chung/php/connect.php';
                             <table class="table" id="myTable">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="col-5">SẢN PHẨM</th>
+                                        <th scope="col" class="col-6">SẢN PHẨM</th>
                                         <th scope="col" class="col-0.5">GIÁ</th>
                                         <th scope="col" class="col-3">SỐ LƯỢNG</th>
-                                        <th scope="col" class="col-3.5">TỔNG</th>
+                                        <th scope="col" class="col-1.5">TỔNG</th>
                                         <th scope="col" class="col-0.5"></th>
                                         <!-- <th scope="col">TẠM TÍNH</th> -->
                                     </tr>
@@ -115,43 +109,47 @@ include '../Chung/php/connect.php';
                                                     '</td>' .
                                                     '<td>' . number_format($row['price'], 0, ',', '.') . '</td>' .
                                                     '<td>' .
+                                                    '<form action="../Chung/php/addtocart.php" method="post">' .
                                                         '<div class="d-flex align-items-center">' .
-                                                            '<form action="../Chung/php/addtocart.php" method="post">' .
+                                                            
                                                                 '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">' .
                                                                 '<input type="hidden" name="quantity" value="' . $row['quantity_sp'] . '">' .
                                                                 '<button type="submit" class="btn btn-outline-success" name="del_one_pro">-</button>' .
-                                                            '</form>'.
+                                                          
 
-                                                            '<span class="mx-2">' . $row['quantity_sp'] . '</span>' .
+                                                            
+                                                                '<input class="m-2" type="text" name="quantity_sp" id="quantityInput" value="' . $row['quantity_sp'] . '" size="2">' .
                                                             
 
-                                                            '<form action="../Chung/php/addtocart.php" method="post">' .
-                                                                '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">' .
-                                                                '<input type="hidden" name="quantity" value="' . $row['quantity_sp'] . '">' .
+                                                            
+
                                                                 '<button type="submit" class="btn btn-outline-success" name="add_one_pro">+</button>' .
-                                                            '</form>' .
-
+                                                            
                                                         '</div>' .
-                                                        '<span class="mx-2">Kho: ' . $row['quantity'] . '</span>' .
+                                                        
+                                                            
+                                                            '<button type="submit" class="btn btn-outline-success" name="update_quantity" style="width: 140px;">Cập nhật</button>'.
 
+                                                        '</form>' .
                                                     '</td>' .
                                                     '<td>' . number_format($row['quantity_sp'] * $row['price'], 0, ',', '.') . '</td>' .
                                                     '<td>' .
                                                         '<form action="../Chung/php/addtocart.php" method="post">' .
                                                             '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">' .
-                                                            '<button type="submit" class="btn btn-danger"  name="del_order"><i class="fa fa-trash" aria-hidden="true"></i></button>' .
+                                                            '<button type="submit" class="btn btn-danger" name="del_order"><i class="fa fa-trash" aria-hidden="true"></i></button>' .
                                                         '</form>' .
                                                     '</td>' . // Delete button
                                                 '</tr>';
-                                                $sum = $sum + $row['quantity_sp'] * $row['price'];
+                                            $sum = $sum + $row['quantity_sp'] * $row['price'];
 
                                         }
                                     }
                                 ?>
                                 </tbody>
-                            </table>
-                            
-                            <div class="container mt-5">
+ 
+                            </table> 
+            
+                            <div class="container mt-1">
                                 <button class="btn btn-light transparent-button">
                                     <a href="../../../../WEB_BAN_HANG/Web/SanPham/SanPham.php?trang=1" class="text-secondary">
                                         <i class="fas fa-arrow-left ml-2"></i>TIẾP TỤC XEM SẢN PHẨM
@@ -223,6 +221,8 @@ include '../Chung/php/connect.php';
             }
         });
     </script>
+
+
     <script type="text/javascript">
         $('#head_content').load('../Chung/php/head.php');
         $('#foot_content').load('../Chung/php/foot.php');

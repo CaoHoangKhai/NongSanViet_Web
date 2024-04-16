@@ -113,6 +113,9 @@ require '../Chung/php/connect.php';
                         <b>Nơi canh tác:</b> <?php echo $row['noicanhtac'];?>
                     </div>
                     <div class="mb-3">
+                        <b>Hạn sử dụng:</b> <?php echo $row['hsd']; ?> tháng
+                    </div>
+                    <div class="mb-3">
                         <b>Bao quản:</b> <?php echo $row['baoquan'];?>
                     </div>
                     <div class="d-flex justify-content-between mt-3"> 

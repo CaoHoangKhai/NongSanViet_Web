@@ -16,14 +16,6 @@ require 'connect.php';
 </head>
 
 <body>
-    <style>
-        body {
-            background-image: url("../../Data/BackGround/bottom.jpg");
-            background-color: rgba(200, 200, 200, 0);
-            background-repeat: repeat; 
-            background-size:  cover ;/*  contain auto Đảm bảo hình nền kích thước phù hợp với kích thước cửa sổ trình duyệt */
-        }
-    </style>
    <header>
     <div class="logo">
         <a href="../../../../WEB_BAN_HANG/Web/TrangChu/TrangChu.php">

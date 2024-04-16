@@ -90,7 +90,6 @@ if(isset($_POST['search'])){
                 echo '<div class="col-6 text-end">Sản phẩm tìm thấy: ' .  $totalProduct . '</div>';
                 $_SESSION['search_name'] = $search_name;
                 while ($row = mysqli_fetch_array($result)) {
-                    if($row['quantity'] > 0){
                 ?>
                 
 
@@ -103,9 +102,6 @@ if(isset($_POST['search'])){
                         <div class="row">
                             <div class="col-auto mr-auto">
                                 <div class="mt-2 red-price fs-5"><?php echo number_format($row['price'], 0, ',', '.') ?> &#8363;</div>
-                            </div>
-                            <div class="col-auto">
-                                <div class="mt-2">Đã bán: <?php echo $row['sold'];?> </div>
                             </div>
                         </div>
                         
@@ -128,7 +124,7 @@ if(isset($_POST['search'])){
                 </div>
 
                 <?php
-                    }
+                    
                 }
                 ?>
             </div>
