@@ -71,7 +71,7 @@ require '../Chung/php/connect.php';
                 $counter = 1;
 
                 while ($row = mysqli_fetch_array($result)) {
-                    
+                    if($row['stat'] == 0){
 
                     
                 ?>
@@ -104,7 +104,8 @@ require '../Chung/php/connect.php';
                     </div>
                 </div>
 
-                <?php
+                <?php 
+                        }
                     }
                 
                 ?>

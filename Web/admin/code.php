@@ -103,7 +103,7 @@ if (isset($_POST['update_product'])) {
 <?php
     if (isset($_POST['del_product'])) {
         $id = $_POST['del_id'];
-        $sql = "DELETE  FROM product WHERE product_id='$id'";
+        $sql = "UPDATE  product SET stat = 1 WHERE product_id='$id'";
         $query_run = mysqli_query($conn,$sql);
         if($query_run){
             $_SESSION['success'] = "Dữ liệu đã được xóa";

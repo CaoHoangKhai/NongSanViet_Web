@@ -137,8 +137,5 @@ include "sidebar.php";
                 </div>
             </div>
         </div>
-
-    
-
     </body>
 </html>

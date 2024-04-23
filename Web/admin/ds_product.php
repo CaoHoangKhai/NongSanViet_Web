@@ -210,6 +210,7 @@ if (isset($_POST['add'])) {
                             $counter = 1;
 
                             while ($row = mysqli_fetch_array($result)) {
+                                if ($row['stat'] == 0 ){
                                 ?>
                                 <tr>
                                     <td><?php echo $counter; ?></td>
@@ -244,6 +245,7 @@ if (isset($_POST['add'])) {
                                 // Increment the counter for the next row
                                 $counter++;
                             //    if($counter == 6) break;
+                                }
                             }
                             ?>
                             <?php

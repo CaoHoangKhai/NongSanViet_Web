@@ -152,7 +152,7 @@ include '../Chung/php/connect.php';
                                     $sum =0;
                                     while ($row = mysqli_fetch_array($result)) {
                                         // Check if quantity is greater than 0
-                                        if ($row['quantity_sp'] > 0) {     
+                                        if ($row['quantity_sp'] > 0 && $row['stat'] == 0) {     
                                             echo '<tr>' .
                                                     '<td>' .
                                                         '<div class="d-flex align-items-center">' .

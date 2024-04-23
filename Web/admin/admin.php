@@ -51,18 +51,7 @@ if ($result->num_rows > 0) {
         <!-- Đường dẫn đến thư viện Chart.js -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        <style>
-            body, html {
-            height: 100vh; /* Chiều cao bằng 100% của kích thước hiển thị của trình duyệt */
-            margin: 0;
-            padding: 0;
-        }
-
-            body {
-                background-image: none !important; /* Loại bỏ hình nền */
-                background-color: #fff !important; /* Đặt màu nền thành trắng */
-            }
-        </style>
+        
     </head>
     <body>
         <div class="container">

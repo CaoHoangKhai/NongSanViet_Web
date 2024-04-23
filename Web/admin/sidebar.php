@@ -1,5 +1,6 @@
 <nav class="main-menu">
     <ul>
+        <!-- Trang chủ-->
         <li class="has-subnav">
             <a href="admin.php?trang=1">
                 <i class="fa fa-home fa-2x"></i>
@@ -8,6 +9,7 @@
                 </span>
             </a>
         </li>
+        <!--Danh sách sản phẩm-->
         <li class="has-subnav">
             <a href="ds_product.php?trang=1">
                 <i class="fa fa-list fa-2x" aria-hidden="true"></i>
@@ -16,6 +18,7 @@
                 </span>
             </a>
         </li>
+        <!--Danh sách các thành viên đã đăng ký-->
         <li class="has-subnav">
             <a href="ds_user.php?trang=1">
                 <i class="fa  fa-user-circle fa-2x" aria-hidden="true"></i>
@@ -24,7 +27,7 @@
                 </span>
             </a>
         </li>
-
+        <!--Danh sách các liên hệ-->
         <li class="has-subnav">
             <a href="ds_feedback.php?trang=1">
                 <i class="fa fa-comments fa-2x" aria-hidden="true"></i>
@@ -33,7 +36,7 @@
                 </span>
             </a>
         </li>
-
+        <!--Danh sách đơn hàng-->
         <li class="has-subnav">
             <a href="ds_order.php?trang=1">
             <i class="fa fa-archive fa-2x" aria-hidden="true"></i>
@@ -62,7 +65,7 @@
         </li> -->
         
     </ul>
-
+    <!--Nút đăng xuất-->
     <ul class="logout">
         <li>
             <a href="../Chung/php/logout.php">

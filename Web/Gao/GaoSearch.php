@@ -90,7 +90,9 @@ if(isset($_POST['search'])){
                 echo '<div class="col-6 text-end">Sản phẩm tìm thấy: ' .  $totalProduct . '</div>';
                 $_SESSION['search_name'] = $search_name;
                 while ($row = mysqli_fetch_array($result)) {
+                    if($row['stat'] == 0){
                 ?>
+                
                 
 
                 <div class="col-md-3 mb-4 product-item">
@@ -124,7 +126,7 @@ if(isset($_POST['search'])){
                 </div>
 
                 <?php
-                    
+                    }
                 }
                 ?>
             </div>

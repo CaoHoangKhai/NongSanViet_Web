@@ -205,13 +205,14 @@
                                     '<input type="text" class="form-control" name="address" id="inputNumber4" value="' . $row['address'] . '"disabled>' .
                                 '</div>'.
                                 '<div class="col-md-6">' .
-                                    '<label for="inputNumber4" class="form-label"><strong>Phương Thức Thanh Toán</strong></label>' .
-                                    '<select class="form-select" id="inputGroupSelect01" name="edit_type">' .
-                                        '<option ' . ($row['type'] == '' ? 'selected' : '') . '>Chọn loại sản phẩm</option>' .
-                                        '<option ' . ($row['type'] == 'Thanh_Toan_Khi_Nhan_Hang' ? 'selected' : '') . ' value="Thanh_Toan_Khi_Nhan_Hang" ' . ($row['type'] == 'Thanh_Toan_Khi_Nhan_Hang' ? 'disabled' : '') . '>Thanh Toán Khi Nhận Hàng</option>' .
-                                        '<option ' . ($row['type'] == 'Thanh_Toan_Bang_Vi_Dien_Tu' ? 'selected' : '') . ' value="Thanh_Toan_Bang_Vi_Dien_Tu" ' . ($row['type'] == 'Thanh_Toan_Bang_Vi_Dien_Tu' ? 'disabled' : '') . '>Thanh toán bằng ví điện tử</option>' .
-                                        '<option ' . ($row['type'] == 'Thanh_Toan_Qua_Ngan_Hang' ? 'selected' : '') . ' value="Thanh_Toan_Qua_Ngan_Hang" ' . ($row['type'] == 'Thanh_Toan_Qua_Ngan_Hang' ? 'disabled' : '') . '>Thẻ Tín Dụng/ Ghi Nợ</option>' .
-                                    '</select>'.
+                                    '<label for="inputNumber4" class="form-label"><strong>Phương Thức Thanh Toán</strong></label>' ;
+                                    if ($row['type'] == "Thanh_Toan_Khi_Nhan_Hang") {
+                                        echo '<input type="text" class="form-control" value="Thanh Toán Khi Nhận Hàng"disabled >';
+                                    } elseif ($row['type'] == "Thanh_Toan_Bang_Vi_Dien_Tu") {
+                                        echo '<input type="text" class="form-control" value="Thanh Toán Bằng Ví Điện Tử"disabled >';
+                                    } elseif ($row['type'] == "Thanh_Toan_Qua_Ngan_Hang") {
+                                        echo '<input type="text" class="form-control" value="Thẻ Tín Dụng/ Ghi Nợ"disabled >';
+                                    }
                                 '</div>';
 
 

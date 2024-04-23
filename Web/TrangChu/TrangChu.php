@@ -86,9 +86,7 @@ if(isset($_SESSION['user_info']) && !empty($_SESSION['user_info'])) {
                
 
                 while ($row = mysqli_fetch_array($result)) {
-                   
-
-                    
+                    if($row['stat'] == 0){
                     ?>
                     
                     <div class="col-md-3 mb-4 product-item">
@@ -122,7 +120,7 @@ if(isset($_SESSION['user_info']) && !empty($_SESSION['user_info'])) {
                     </div>
 
                     <?php
-                    
+                    }
                 }
                 ?>
 

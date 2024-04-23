@@ -28,7 +28,8 @@ if (isset($_POST['order_detail'])) {
         $sql = "SELECT * FROM shopping_cart sc JOIN product p ON sc.product_id = p.product_id WHERE id_user ='$id_user' ";
         $result = mysqli_query($conn, $sql);
 
-        while ($row = mysqli_fetch_array($result)) {
+        while ($row = mysqli_fetch_array($result) ) {
+            if($row['stat'] == 0){
             // Thêm chi tiết đơn hàng vào bảng order_detail
             $sql_donhang = "INSERT INTO `order_detail`(`product_id`, `quantity_product`, `price`, `item_code`, `id_order`) 
                             VALUES ('{$row['product_id']}', '{$row['quantity_sp']}', '{$row['price']}', '$item_code', '{$row_khachhang['id_order']}')";
@@ -50,6 +51,7 @@ if (isset($_POST['order_detail'])) {
                 header('Location: ../GioHang/GioHang.php');
             }
         }
+    }
     } else {
         // Xử lý trường hợp thêm thông tin đơn hàng thất bại
         echo "Error inserting customer order: " . $conn->error;

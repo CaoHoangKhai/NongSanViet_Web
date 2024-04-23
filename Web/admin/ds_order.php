@@ -65,11 +65,11 @@ include "sidebar.php";
                         if ($page == '' ||  $page == 1) {
                             $begin = 0;
                         } else {
-                            $begin = ($page * 8) - 8;
+                            $begin = ($page * 7) - 7;
                         }
                         ?>
                         <?php
-                        $sql = "SELECT order_customer.*, customer.id_user FROM order_customer JOIN customer ON order_customer.id_user = customer.id_user ORDER BY order_customer.id_order DESC  LIMIT  $begin,8";
+                        $sql = "SELECT order_customer.*, customer.id_user FROM order_customer JOIN customer ON order_customer.id_user = customer.id_user ORDER BY order_customer.id_order DESC  LIMIT  $begin,7";
                         $result = mysqli_query($conn, $sql);
                         while ($row = mysqli_fetch_array($result)) {
                             // Lấy id_order từ kết quả truy vấn
@@ -128,7 +128,7 @@ include "sidebar.php";
                 $kq = $conn->query($count);
                 $row = $kq->fetch_assoc();
                 $totalCustomers = $row['total'];
-                $trang = ceil($totalCustomers / 8);
+                $trang = ceil($totalCustomers / 7);
                 ?>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-end" id="pagination">

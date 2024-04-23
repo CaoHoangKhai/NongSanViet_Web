@@ -72,7 +72,7 @@ require '../Chung/php/connect.php';
                 $counter = 1;
 
                 while ($row = mysqli_fetch_array($result)) {
-                    
+                    if($row['stat'] == 0){
                 ?>
                 
                 <div class="col-md-3 mb-4 product-item">
@@ -106,7 +106,7 @@ require '../Chung/php/connect.php';
                 </div>
 
                 <?php
-                    
+                    }
                 }
                 ?>
             </div>

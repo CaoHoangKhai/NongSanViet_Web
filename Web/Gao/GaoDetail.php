@@ -84,6 +84,7 @@ require '../Chung/php/connect.php';
                     }
                     else {
                         while ($row = mysqli_fetch_array($result)) {
+                            if($row['stat'] == 0){
                     ?>
                 <span>
                     <a  class="link-dark" href="../TrangChu/TrangChu.php">TRANG CHỦ</a>
@@ -137,7 +138,8 @@ require '../Chung/php/connect.php';
                 </div>
                 
             <?php
-                        }
+                            }
+                    }
                 }
             ?>
         

@@ -77,7 +77,7 @@ include '../Chung/php/connect.php';
                     }
                 ?>
                 <!-- Bảng hiển thị giỏ hàng -->
-                <div class="col-sm-5 col-md-6">
+                <div class="col-sm-5 col-md-7">
                     <div class="container">
                         <div class="row flex-container">
                             <table class="table" id="myTable">
@@ -99,7 +99,7 @@ include '../Chung/php/connect.php';
                                     $product_count = mysqli_num_rows($result); // Đếm số lượng sản phẩm trong giỏ hàng
                                     while ($row = mysqli_fetch_array($result)) {
                                         // Check if quantity is greater than 0
-                                        if ($row['quantity_sp'] > 0) {     
+                                        if ($row['quantity_sp'] > 0 && $row['stat'] == 0) {     
                                             echo '<tr>' .
                                                     '<td>' .
                                                         '<div class="d-flex align-items-center">' .
@@ -161,7 +161,7 @@ include '../Chung/php/connect.php';
                 </div>
                 <!-- Thông tin giỏ hàng -->
                 
-                <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
+                <div class="col-sm-5 offset-sm-2 col-md-5 offset-md-0">
                     <div class="container">
                         <div class="row flex-container">
                             <table class="table">
