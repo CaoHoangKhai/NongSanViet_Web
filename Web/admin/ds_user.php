@@ -4,41 +4,6 @@ include "header_admin.php";
 include "sidebar.php";
 ?>
 <?php
-$url = 'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json';
-$data = file_get_contents($url);
-$jsonData = json_decode($data, true);
-
-if ($jsonData === null) {
-    die('Failed to decode JSON data');
-}
-
-function getCityName($cityCode) {
-    global $jsonData;
-
-    foreach ($jsonData as $city) {
-        if ($city['Id'] == $cityCode) {
-            return $city['Name'];
-        }
-    }
-
-    return 'NULL';
-}
-
-function getDistrictName($cityCode, $districtCode) {
-    global $jsonData;
-
-    foreach ($jsonData as $city) {
-        if ($city['Id'] == $cityCode && isset($city['Districts'])) {
-            foreach ($city['Districts'] as $district) {
-                if ($district['Id'] == $districtCode) {
-                    return $district['Name'];
-                }
-            }
-        }
-    }
-
-    return 'NULL';
-}
 
 $sql = 'SELECT * FROM customer';
 // Thực hiện truy vấn SQL để lấy dữ liệu từ bảng customer
@@ -51,13 +16,7 @@ if ($result === false) {
 }
 
 // Duyệt qua các dòng dữ liệu và in ra thông tin
-while ($row = $result->fetch_assoc()) {
-    $cityCode = $row['city']; // Thay 'city' bằng tên cột chứa mã thành phố trong bảng customer
-    $districtCode = $row['district']; // Thay 'districts' bằng tên cột chứa mã quận huyện trong bảng customer
 
-    $cityName = getCityName($cityCode);
-    $districtName = getDistrictName($cityCode, $districtCode);
-}
 ?>
 <?php
 
@@ -72,13 +31,11 @@ if (isset($_POST['save'])) {
     $password = $_POST['password'];
     $phonenumber = $_POST['phonenumber'];
     $email = $_POST['email'];
-    $city = $_POST['city'];
-    $district = $_POST['district'];
     $address = $_POST['address'];
     $role = $_POST['role'];
 
     // Kiểm tra xem tất cả các trường đã được điền đúng hay chưa
-    if (!empty($username) && !empty($password) && !empty($phonenumber) && !empty($email) && !empty($city) && !empty($district) && !empty($address)) {
+    if (!empty($username) && !empty($password) && !empty($phonenumber) && !empty($email) && !empty($address)) {
 
         // Kiểm tra xem email đã tồn tại trong cơ sở dữ liệu hay chưa
         $checkEmailQuery = "SELECT * FROM `customer` WHERE `email` = '$email'";
@@ -94,8 +51,8 @@ if (isset($_POST['save'])) {
             // Kiểm tra số điện thoại có đúng định dạng hay không
             if (isValidPhoneNumber($phonenumber)) {
                 // Thêm dữ liệu vào cơ sở dữ liệu
-                $insertQuery = "INSERT INTO `customer` (`username`, `password`, `phonenumber`, `email`, `city`, `district`, `address`,`role`) 
-                    VALUES ('$username', '$password', '$phonenumber', '$email', '$city', '$district', '$address','$role')";
+                $insertQuery = "INSERT INTO `customer` (`username`, `password`, `phonenumber`, `email` `address`,`role`) 
+                    VALUES ('$username', '$password', '$phonenumber', '$email','$address','$role')";
 
                 if ($conn->query($insertQuery) === TRUE) {
                     echo "<script>alert('Đăng ký thành công')</script>";
@@ -155,7 +112,7 @@ if (isset($_POST['save'])) {
         <div class="row">
             <div class="col-11 offset-md-1">
                 <button type="button" class="btn btn-primary float-end mt-3 mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Add User
+                    Thêm khách hàng
                 </button>
             </div>
         </div>
@@ -164,7 +121,7 @@ if (isset($_POST['save'])) {
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Thêm khách hàng</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
@@ -210,27 +167,6 @@ if (isset($_POST['save'])) {
                                     Email không được bỏ trống.
                                 </div>
                             </div>
-
-                            <div class="col-md-6">
-                                <label for="validationCustom04" class="form-label"><strong>Tỉnh/Thành phố*</strong></label>
-                                <select class="form-select" name="city" id="city" required>
-                                <option selected value="">Chọn Tỉnh/Thành phố của bạn</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Hãy chọn một tỉnh/thành phố hợp lệ.
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="validationCustom04" class="form-label"><strong>Quận/Huyện*</strong></label>
-                                <select class="form-select" name="district" id="district" required>
-                                <option selected value="">Chọn Quận/Huyện của bạn</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Hãy chọn một quận/huyện hợp lệ.
-                                </div>
-                            </div>
-
 
                             <div class="col-md-6">
                                 <label for="inputAddress" class="form-label"><strong>Địa chỉ*</strong></label>
@@ -280,8 +216,6 @@ if (isset($_POST['save'])) {
                             <th scope="col"class="col-3">Khách Hàng</th>
                             <th scope="col"class="col-1">Email</th>
                             <th scope="col"class="col-1">Điện Thoại</th>
-                            <th scope="col"class="col-2">Thành Phố</th>
-                            <th scope="col"class="col-2">Quận Huyện</th>
                             <th scope="col"class="col-2">Địa Chỉ</th>
                            
                             <th scope="col"class="col-0.5">Xóa</th>
@@ -305,11 +239,7 @@ if (isset($_POST['save'])) {
                         $counter = 1;
 
                         while ($row = mysqli_fetch_array($result)) {
-                            // Lấy thông tin thành phố và quận huyện dựa trên mã thành phố và mã quận huyện từ cơ sở dữ liệu
-                            $cityCode = $row['city']; // Thay 'city' bằng tên cột chứa mã thành phố trong bảng customer
-                            $districtCode = $row['district']; // Thay 'districts' bằng tên cột chứa mã quận huyện trong bảng customer
-                            $cityName = getCityName($cityCode);
-                            $districtName = getDistrictName($cityCode, $districtCode);
+                           
                             if ($row['status'] == 0){
                         ?>
                             <tr>
@@ -317,8 +247,6 @@ if (isset($_POST['save'])) {
                                 <td><?php echo $row['username']; ?></td>
                                 <td><?php echo $row['email']; ?></td>
                                 <td><?php echo $row['phonenumber']; ?></td>
-                                <td><?php echo $cityName; ?></td>
-                                <td><?php echo $districtName; ?></td>
                                 <td><?php echo $row['address']; ?></td>
                                 
                                 <td>

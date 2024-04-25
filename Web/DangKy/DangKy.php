@@ -7,11 +7,11 @@ if (isset($_POST['sign_up'])) {
     $password = $_POST['password'];
     $phonenumber = $_POST['phonenumber'];
     $email = $_POST['email'];
-    $city = $_POST['city'];
-    $district = $_POST['district'];
+    // $city = $_POST['city'];
+    // $district = $_POST['district'];
     $address = $_POST['address'];
 
-    if (!empty($username) && !empty($password) && !empty($phonenumber) && !empty($email) && !empty($city) && !empty($district) && !empty($address)) {
+    if (!empty($username) && !empty($password) && !empty($phonenumber) && !empty($email) && !empty($address)) {
 
         // Kiểm tra xem email đã tồn tại trong cơ sở dữ liệu hay chưa
         $checkEmailQuery = "SELECT * FROM `customer` WHERE `email` = '$email'";
@@ -26,8 +26,8 @@ if (isset($_POST['sign_up'])) {
             echo "<script>alert('Email đã được sử dụng. Vui lòng chọn email khác.')</script>";
         } else {
             // Thêm dữ liệu vào cơ sở dữ liệu
-            $insertQuery = "INSERT INTO `customer` (`username`, `password`, `phonenumber`, `email`, `city`, `district`, `address`) 
-                VALUES ('$username', '$password', '$phonenumber', '$email', '$city', '$district', '$address')";
+            $insertQuery = "INSERT INTO `customer` (`username`, `password`, `phonenumber`, `email`,`address`) 
+                VALUES ('$username', '$password', '$phonenumber', '$email', '$address')";
 
             if ($conn->query($insertQuery) === TRUE) {
                 echo "<script>alert('Đăng ký thành công')</script>";
@@ -126,7 +126,7 @@ if (isset($_POST['sign_up'])) {
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <label for="validationCustom04" class="form-label"><strong>Tỉnh/Thành phố*</strong></label>
                         <select class="form-select" name="city" id="city" required>
                             <option selected value="">Chọn Tỉnh/Thành phố của bạn</option>
@@ -144,7 +144,7 @@ if (isset($_POST['sign_up'])) {
                         <div class="invalid-feedback">
                             Hãy chọn một quận/huyện hợp lệ.
                         </div>
-                    </div>
+                    </div> -->
                     
 
                     <div class="col-md-6">

@@ -105,9 +105,6 @@ require '../Chung/php/connect.php';
                     <span class=" text-start"><?php echo preg_replace('/\[|\]/', '<br>', $row['content'],) ?><br></span>
                     <br>
                     <div class="mb-3">
-                        <b>Thời gian bảo quản:</b> <?php echo $row['hsd'] ?> tháng
-                    </div>
-                    <div class="mb-3">
                         <b>Nhà sản xuất:</b> <?php echo $row['nhacungcap'];?>
                     </div>
                     <div class="mb-3">
