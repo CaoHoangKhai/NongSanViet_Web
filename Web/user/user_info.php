@@ -20,43 +20,6 @@ if (isset($_SESSION['login']) && $_SESSION['login'] === true && isset($_SESSION[
     exit();
 }
 
-$url = 'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json';
-$data = file_get_contents($url);
-$jsonData = json_decode($data, true);
-
-if ($jsonData === null) {
-    die('Failed to decode JSON data');
-}
-
-// Hàm lấy tên thành phố từ mã thành phố
-function getCityName($cityCode) {
-    global $jsonData;
-
-    foreach ($jsonData as $city) {
-        if ($city['Id'] == $cityCode) {
-            return $city['Name'];
-        }
-    }
-
-    return 'NULL';
-}
-
-// Hàm lấy tên quận/huyện từ mã thành phố và mã quận/huyện
-function getDistrictName($cityCode, $districtCode) {
-    global $jsonData;
-
-    foreach ($jsonData as $city) {
-        if ($city['Id'] == $cityCode && isset($city['Districts'])) {
-            foreach ($city['Districts'] as $district) {
-                if ($district['Id'] == $districtCode) {
-                    return $district['Name'];
-                }
-            }
-        }
-    }
-
-    return 'NULL';
-}
 
 
 $sql = "SELECT * FROM customer WHERE id_user = '$id_user'";
@@ -76,8 +39,7 @@ if (isset($_POST['update_user'])) {
     $username = $_POST['username'];
     $phonenumber = $_POST['phonenumber'];
     $email = $_POST['email'];
-    $city = $_POST['city'];
-    $district = $_POST['district'];
+
     $address = $_POST['address'];
 
     // Kiểm tra xem số điện thoại đã tồn tại chưa
@@ -101,7 +63,7 @@ if (isset($_POST['update_user'])) {
        
 
 
-        $query = "UPDATE customer SET username='$username', phonenumber ='$phonenumber', email='$email', city = '$city', district = '$district',address='$address' WHERE id_user='$id'";
+        $query = "UPDATE customer SET username='$username', phonenumber ='$phonenumber', email='$email',address='$address' WHERE id_user='$id'";
         $query_run = mysqli_query($conn, $query);
 
         if ($query_run) {
@@ -150,15 +112,7 @@ if (isset($_POST['update_user'])) {
                 
             </div>
 
-            <div class="col-md-4 offset-md-1">
-                <label for="validationCustom04" class="form-label"><strong>Tỉnh/Thành phố</strong></label>
-                <input type="text" class="form-control border-dark" name="city" id="inputCity" value="<?php echo getCityName($row['city']); ?>" disabled>
-            </div>
-
-            <div class="col-md-4 offset-md-1">
-                <label for="validationCustom04" class="form-label"><strong>Quận/Huyện</strong></label>
-                <input type="text" class="form-control border-dark" name="district" id="inputDistrict" value="<?php echo getDistrictName($row['city'], $row['district']); ?>" disabled>
-            </div>
+           
 
             <div class="col-md-4 offset-md-1">
                 <label for="inputAddress" class="form-label"><strong>Địa chỉ</strong></label>
@@ -227,26 +181,7 @@ if (isset($_POST['update_user'])) {
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
-                                <label for="validationCustom04" class="form-label"><strong>Tỉnh/Thành phố</strong></label>
-                                <select class="form-select" name="city" id="city" required>
-                                <option selected value="">Chọn Tỉnh/Thành phố của bạn</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Hãy chọn một tỉnh/thành phố hợp lệ.
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="validationCustom04" class="form-label"><strong>Quận/Huyện</strong></label>
-                                <select class="form-select" name="district" id="district" required>
-                                <option selected value="">Chọn Quận/Huyện của bạn</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Hãy chọn một quận/huyện hợp lệ.
-                                </div>
-                            </div>
-
+                           
 
                             <div class="col-md-6">
                                 <label for="inputAddress" class="form-label"><strong>Địa chỉ</strong></label>

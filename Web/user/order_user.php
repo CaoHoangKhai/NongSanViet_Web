@@ -132,20 +132,23 @@
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-end" id="pagination">
                         <li class="page-item">
-                            <a class="page-link" href="order_user.php?trang=1" aria-label="Previous">
+                            <a class="page-link" href="admin_order.php?trang=1" aria-label="Previous">
                                 <span aria-hidden="true" name="first">&laquo;</span>
                             </a>
                         </li>
                         <?php
                         for($i =1;$i <= $trang;$i++){
                         ?>
-                        <li class="page-item"><a class="page-link" href="order_user.php?trang=<?php echo $i ?>"><?php echo $i ?></a></li>
+                        <li class="page-item"><a class="page-link" href="admin_order.php?trang=<?php echo $i ?>"><?php echo $i ?></a></li>
                         <?php
                         }
                         ?>
 
                         <li class="page-item">
-                            <a class="page-link" href="order_user.php?trang=<?php echo $trang ?>" aria-label="Next">
+                            <?php 
+                                if($trang == 0) $trang =1;
+                            ?>
+                            <a class="page-link" href="admin_order.php?trang=<?php echo $trang ?>" aria-label="Next">
                                 <span aria-hidden="true" name="last">&raquo;</span>
                             </a>
                         </li>
@@ -156,7 +159,7 @@
                 // Hiển thị thông báo khi không có đơn hàng
                 echo '<div class="text-center fs-4"><p>Bạn chưa có đơn hàng.</p>';
                 echo '<div class="d-flex justify-content-center" style="background-color: transparent;">';
-                echo '<img src="../../Data/Cart/ko_co_don_hang_1.png" alt="Bạn chưa có đơn hàng" class="img-thumbnail border-0" style=" background-color: transparent; width: 200px;">';
+                echo '<img src="../../Data/Cart/ko_co_don_hang.png" alt="Bạn chưa có đơn hàng" class="img-thumbnail border-0" style=" background-color: transparent; width: 200px;">';
                 echo '</div>';
                 echo '</div>';
                 
@@ -188,68 +191,67 @@
                                             WHERE o_r.id_order = $id_order";
                             $result_donhang = mysqli_query($conn, $sql_donhang);
                             echo '<tr>' .
-                                '<div class="col-md-6">' .
-                                    '<label for="inputNumber4" class="form-label"><strong>Họ và Tên</strong></label>' .
-                                    '<input type="text" class="form-control" name="username" id="inputNumber4" value="' . $row['username'] . '"disabled>' .
-                                '</div>'.
-                                '<div class="col-md-6">' .
-                                    '<label for="inputNumber4" class="form-label"><strong>Email</strong></label>' .
-                                    '<input type="text" class="form-control" name="email" id="inputNumber4" value="' . $row['email'] . '" disabled>' .
-                                '</div>'.
-                                '<div class="col-md-6">' .
-                                    '<label for="inputNumber4" class="form-label"><strong>Số điện thoại</strong></label>' .
-                                    '<input type="text" class="form-control" name="phonenumber" id="inputNumber4" value="' . $row['phonenumber'] . '"disabled>' .
-                                '</div>'.
-                                '<div class="col-md-6">' .
-                                    '<label for="inputNumber4" class="form-label"><strong>Địa chỉ</strong></label>' .
-                                    '<input type="text" class="form-control" name="address" id="inputNumber4" value="' . $row['address'] . '"disabled>' .
-                                '</div>'.
-                                '<div class="col-md-6">' .
-                                    '<label for="inputNumber4" class="form-label"><strong>Phương Thức Thanh Toán</strong></label>' ;
-                                    if ($row['type'] == "Thanh_Toan_Khi_Nhan_Hang") {
-                                        echo '<input type="text" class="form-control" value="Thanh Toán Khi Nhận Hàng"disabled >';
-                                    } elseif ($row['type'] == "Thanh_Toan_Bang_Vi_Dien_Tu") {
-                                        echo '<input type="text" class="form-control" value="Thanh Toán Bằng Ví Điện Tử"disabled >';
-                                    } elseif ($row['type'] == "Thanh_Toan_Qua_Ngan_Hang") {
-                                        echo '<input type="text" class="form-control" value="Thẻ Tín Dụng/ Ghi Nợ"disabled >';
-                                    }
-                                '</div>';
-
-
-
-                                if (!empty($row['note'])) {
-                                    echo '<div class="col-md-12">' .
-                                            '<label for="inputNumber4" class="form-label"><strong>Ghi Chú</strong></label>' .
-                                            '<input type="text" class="form-control" name="edit_phonenumber" id="inputNumber4" value="' . $row['note'] . '"disabled>' .
-                                        '</div>';
-                                }
-                                ;
-                                echo '<div class="col-md-12">' .
-                                        '<label for="inputNumber4" class="form-label fs-4"><strong>Thông tin sản phẩm</strong></label>' .
+                                    '<div class="col-md-6">' .
+                                        '<label for="inputNumber4" class="form-label"><strong>Họ và Tên</strong></label>' .
+                                        '<input type="text" class="form-control" name="username" id="inputNumber4" value="' . $row['username'] . '" disabled>' .
+                                    '</div>' .
+                                    '<div class="col-md-6">' .
+                                        '<label for="inputNumber4" class="form-label"><strong>Email</strong></label>' .
+                                        '<input type="text" class="form-control" name="email" id="inputNumber4" value="' . $row['email'] . '" disabled>' .
+                                    '</div>' .
+                                    '<div class="col-md-6">' .
+                                        '<label for="inputNumber4" class="form-label"><strong>Số điện thoại</strong></label>' .
+                                        '<input type="text" class="form-control" name="phonenumber" id="inputNumber4" value="' . $row['phonenumber'] . '" disabled>' .
+                                    '</div>' .
+                                    '<div class="col-md-6">' .
+                                        '<label for="inputNumber4" class="form-label"><strong>Địa chỉ</strong></label>' .
+                                        '<input type="text" class="form-control" name="address" id="inputNumber4" value="' . $row['address'] . '" disabled>' .
                                     '</div>';
-                    
-                            
-                            while ($row_donhang = mysqli_fetch_array($result_donhang)) {
-                                if($row_donhang['quantity_product'] > 0){
 
-                                    echo 
-                                            '<td>' .
-                                                '<div class="d-flex align-items-center">' .
-                                                    '<span class="ml-2 fs-6">' . $row_donhang['product_name'] . '-1kg x ' . $row_donhang['quantity_product'] . '</span>' .
-                                                    '<strong class="ms-auto fs-6">' . number_format($row_donhang['quantity_product'] * $row_donhang['price'], 0, ',', ',') . ' VND</strong>'.
-                                                '</div>'.
-                                            '</td>' ;
-                                }
-                                    
+                            echo '<div class="col-md-6">' .
+                                '<label for="inputNumber4" class="form-label"><strong>Phương Thức Thanh Toán</strong></label>' .
+                                '<input type="text" class="form-control" name="payment_method" id="inputNumber4" value="';
+                            if ($row['type'] === 'Thanh_Toan_Khi_Nhan_Hang') {
+                                echo 'Thanh Toán Khi Nhận Hàng';
+                            } elseif ($row['type'] === 'Thanh_Toan_Bang_Vi_Dien_Tu') {
+                                echo 'Thanh toán bằng ví điện tử';
+                            } elseif ($row['type'] === 'Thanh_Toan_Qua_Ngan_Hang') {
+                                echo 'Thẻ Tín Dụng/ Ghi Nợ';
+                            } else {
+                                echo 'Other Payment Method';
                             }
-                            echo '<hr>'. 
-                                '<div class="d-flex align-items-center">' .
-                            
-                                    '<span class="ml-2 fs-4"><strong> Tổng Tiền</strong></span>' .
-                                    '<strong class="ms-auto fs-4">' . number_format($row['price'], 0, ',', ',') . ' VND</strong>'.
+                            echo '" disabled>'.
                                 '</div>';
 
-                        ?>
+                            if (!empty($row['note'])) {
+                                echo '<div class="col-md-12">' .
+                                        '<label for="inputNumber4" class="form-label"><strong>Ghi Chú</strong></label>' .
+                                        '<input type="text" class="form-control" name="edit_phonenumber" id="inputNumber4" value="' . $row['note'] . '" disabled>' .
+                                    '</div>';
+                            }
+
+                            echo '<div class="col-md-12">' .
+                                    '<label for="inputNumber4" class="form-label fs-4"><strong>Thông tin sản phẩm</strong></label>' .
+                                '</div>';
+
+                            while ($row_donhang = mysqli_fetch_array($result_donhang)) {
+                                if ($row_donhang['quantity_product'] > 0) {
+                                    echo '<td>' .
+                                            '<div class="d-flex align-items-center">' .
+                                                '<span class="ml-2 fs-6">' . $row_donhang['product_name'] . '-1kg x ' . $row_donhang['quantity_product'] . '</span>' .
+                                                '<strong class="ms-auto fs-6">' . number_format($row_donhang['quantity_product'] * $row_donhang['price'], 0, ',', ',') . ' VND</strong>' .
+                                            '</div>' .
+                                        '</td>';
+                                }
+                            }
+
+                            echo '<hr>' . 
+                                '<div class="d-flex align-items-center">' .
+                                    '<span class="ml-2 fs-4"><strong> Tổng Tiền</strong></span>' .
+                                    '<strong class="ms-auto fs-4">' . number_format($row['price'], 0, ',', ',') . ' VND</strong>' .
+                                '</div>';
+                            ?>
+
                         <form class="row g-3 needs-validation" action="../Chung/php/code.php" method="post" novalidate>
                             <div class="col-12">
                                 <div class="col-md-6">
@@ -267,6 +269,7 @@
                                 </div>
                             </div> 
                         </form>
+
                     </div>
                 </div>
             </div>

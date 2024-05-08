@@ -51,7 +51,7 @@ if (isset($_POST['save'])) {
             // Kiểm tra số điện thoại có đúng định dạng hay không
             if (isValidPhoneNumber($phonenumber)) {
                 // Thêm dữ liệu vào cơ sở dữ liệu
-                $insertQuery = "INSERT INTO `customer` (`username`, `password`, `phonenumber`, `email` `address`,`role`) 
+                $insertQuery = "INSERT INTO `customer` (`username`, `password`, `phonenumber`, `email`, `address`,`role`) 
                     VALUES ('$username', '$password', '$phonenumber', '$email','$address','$role')";
 
                 if ($conn->query($insertQuery) === TRUE) {
@@ -216,7 +216,7 @@ if (isset($_POST['save'])) {
                             <th scope="col"class="col-3">Khách Hàng</th>
                             <th scope="col"class="col-1">Email</th>
                             <th scope="col"class="col-1">Điện Thoại</th>
-                            <th scope="col"class="col-2">Địa Chỉ</th>
+                            <th scope="col"class="col-4">Địa Chỉ</th>
                            
                             <th scope="col"class="col-0.5">Xóa</th>
                         </tr>
@@ -231,9 +231,9 @@ if (isset($_POST['save'])) {
                         if( $page == '' ||  $page == 1){
                             $begin =0;
                         }else {
-                            $begin = ($page*5)-5;
+                            $begin = ($page*7)-7;
                         }
-                        $sql = "SELECT * FROM customer WHERE role= 0 ORDER BY id_user ASC LIMIT $begin,5";
+                        $sql = "SELECT * FROM customer WHERE role= 0 ORDER BY id_user ASC LIMIT $begin,7";
                         $result = mysqli_query($conn, $sql);
                         // Initializing a variable to keep track of the ID
                         $counter = 1;
@@ -275,7 +275,7 @@ if (isset($_POST['save'])) {
                         $kq = $conn->query($count);
                         $row = $kq->fetch_assoc();
                         $totalCustomers = $row['total'];
-                        $trang = ceil($totalCustomers/5);
+                        $trang = ceil($totalCustomers/7);
                         ?>
                     </tbody>
                 </table>
