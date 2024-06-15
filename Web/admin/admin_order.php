@@ -122,6 +122,8 @@
                                 echo "Đơn hàng đang chờ xác nhận (HỦY)";
                             } elseif ($row['status'] == 6) {
                                 echo "Đơn hàng yêu cầu HỦY thành công";
+                            } elseif ($row['status'] == 7) {
+                                echo "Đơn hàng bị hủy bởi quản lý";
                             }
                             ?>
                         </td>

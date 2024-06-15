@@ -170,17 +170,26 @@ if (isset($_POST['del_order'])) {
 }
 ?>
 <?php
-if (isset($_POST['del_order_customer'])) {
+if (isset($_POST['Cancel'])) {
+    
     $id_order = $_POST['id_order'];
-    $page=$_POST['trang'];
-    $sql = "DELETE  FROM order_customer WHERE id_order='$id_order'";
-    $query_run = mysqli_query($conn,$sql);
-    if($query_run){
-        $_SESSION['success'] = "ĐƠN HÀNG ĐÃ ĐƯỢC XÓA";
-        header('Location: ds_order.php?trang='.$page);
-    }else{
+    $page = $_POST['trang'];
+    $lidohuy = $_POST['lidohuy'];
+    echo $id_order . "hiiiii";
+    echo $page;
+    echo $lidohuy;
+    $sql = "UPDATE order_customer SET status = 7, huy = '$lidohuy' WHERE id_order = '$id_order'";
+    $query_run = mysqli_query($conn, $sql);
+
+    // Check if the query was successful
+    if ($query_run) {
+        $_SESSION['success'] = "ĐƠN HÀNG ĐÃ ĐƯỢC XỬ LÝ";
+    } else {
         $_SESSION['success'] = "LỖI HỆ THỐNG";
-        header('Location: ds_order.php?trang='.$page);
     }
+
+    // Redirect to the orders page
+    header('Location: ds_order.php?trang=' . $page);
+    exit();
 }
 ?>

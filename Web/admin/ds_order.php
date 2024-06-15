@@ -28,6 +28,22 @@ include "sidebar.php";
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script src="../Chung/js/header.js" defer></script>
+    <style>
+        @keyframes colorBlink {
+            0% { color: red; }
+            25% { color: blue; }
+            50% { color: green; }
+            75% { color: yellow; }
+            100% { color: red; }
+        }
+
+        .blink-text {
+            animation: colorBlink 0.5s infinite;
+        }
+    </style>
+
+    </style>
+
 </head>
 
 <body>
@@ -48,11 +64,13 @@ include "sidebar.php";
                         <tr>
                             <th scope="col" class="col-1.5">Họ tên</th>
                             <th scope="col" class="col-0.5">Điện Thoại</th>
-                            <th scope="col" class="col-0.5">Địa Chỉ</th>
-                            <th scope="col" class="col-2.5">Hình Thức Nhận Hàng</th>
+                            
+                            <th scope="col" class="col-1.25">Hình Thức Nhận Hàng</th>
                             <th scope="col" class="col-0.75">Tổng</th>
                             <th scope="col" class="col-1.5"></th>
-                            <th scope="col" class="col-0.5"></th>
+                            <th scope="col" class="col-1.5"></th>
+                            <th scope="col" class="col-"></th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -78,7 +96,7 @@ include "sidebar.php";
                             <tr>
                                 <td><?php echo $row['username']; ?></td>
                                 <td><?php echo $row['phonenumber']; ?></td>
-                                <td><?php echo $row['address']; ?></td>
+                                
                                 <td>
                                     <?php
                                     if ($row['status'] == 0) {
@@ -95,10 +113,13 @@ include "sidebar.php";
                                         echo "Đơn hàng đang chờ xác nhận (HỦY)";
                                     } elseif ($row['status'] == 6) {
                                         echo "Đơn hàng yêu cầu HỦY thành công";
+                                    }elseif ($row['status'] == 7) {
+                                        echo "Đơn hàng bị hủy bởi quản lý!!!";
                                     }
                                     ?>
                                 </td>
                                 <td><?php echo number_format($row['price'], 0, ',', ',') . ' VND'; ?></td>
+                                
 
                                 <td class="d-flex align-items-center">
                                     <form action="" method="post">
@@ -108,15 +129,24 @@ include "sidebar.php";
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="code.php" method="post">
-                                        <input type="hidden" name="id_order" value="<?php echo $row['id_order']; ?>">
-                                        <input type="hidden" name="trang" value="<?php echo $page ?>">
-                                        <button type="submit" name="del_order_customer" class="btn btn-success">Xóa</button>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="id_order" value="<?php echo $id_order; ?>">
+                                        <?php if($row['status'] != 3 && $row['status'] != 4 && $row['status'] != 5 && $row['status'] != 6 && $row['status'] != 7): ?> <!-- Kiểm tra điều kiện $row['status'] -->
+                                            <!-- <button type="submit"  class="btn btn-success">Hủy Đơn Hàng</button> -->
+                                            <button type="button" name="Cancel" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Hủy Đơn Hàng</button>
+                                            
+                                        <?php endif; ?>
                                     </form>
-
-                                    </script>
                                 </td>
 
+
+                                <td>
+                                    <?php
+                                        if ($row['status'] == 0) {
+                                            echo '<span class="blink-text">New</span>';
+                                        }
+                                    ?>
+                                </td>
                             </tr>
                         <?php
                         }
@@ -223,6 +253,7 @@ include "sidebar.php";
                                         // echo '<option value="5">Đơn hàng đang chờ xác nhận (HỦY)</option>';
                                         // echo '<option value="6">Đơn hàng yêu cầu HỦY thành công</option>';
                                         break;
+                                        
                                     case 1:
                                         // echo '<option value="0">Đơn hàng đang chờ xác nhận</option>';
                                         echo '<option value="1" selected>Đơn hàng đang được chuẩn bị</option>';
@@ -232,6 +263,7 @@ include "sidebar.php";
                                         // echo '<option value="5">Đơn hàng đang chờ xác nhận (HỦY)</option>';
                                         // echo '<option value="6">Đơn hàng yêu cầu HỦY thành công</option>';
                                         break;
+
                                     case 2:
                                         // echo '<option value="0">Đơn hàng đang chờ xác nhận</option>';
                                         // echo '<option value="1">Đơn hàng đang được chuẩn bị</option>';
@@ -241,6 +273,7 @@ include "sidebar.php";
                                         // echo '<option value="5">Đơn hàng đang chờ xác nhận (HỦY)</option>';
                                         // echo '<option value="6">Đơn hàng yêu cầu HỦY thành công</option>';
                                         break;
+
                                     case 3:
                                         // echo '<option value="0">Đơn hàng đang chờ xác nhận</option>';
                                         // echo '<option value="1">Đơn hàng đang được chuẩn bị</option>';
@@ -250,6 +283,7 @@ include "sidebar.php";
                                         // echo '<option value="5">Đơn hàng đang chờ xác nhận (HỦY)</option>';
                                         // echo '<option value="6">Đơn hàng yêu cầu HỦY thành công</option>';
                                         break;
+
                                     case 4:
                                         // echo '<option value="0">Đơn hàng đang chờ xác nhận</option>';
                                         // echo '<option value="1">Đơn hàng đang được chuẩn bị</option>';
@@ -259,6 +293,7 @@ include "sidebar.php";
                                         // echo '<option value="5">Đơn hàng đang chờ xác nhận (HỦY)</option>';
                                         // echo '<option value="6">Đơn hàng yêu cầu HỦY thành công</option>';
                                         break;
+
                                     case 5:
                                         // echo '<option value="0">Đơn hàng đang chờ xác nhận</option>';
                                         // echo '<option value="1">Đơn hàng đang được chuẩn bị</option>';
@@ -322,14 +357,48 @@ include "sidebar.php";
                         </div>
                     </div>
                 </div>
+                
+                
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <form  action="code.php" method="post">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Hủy Đơn Hàng</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="message-text" class="col-form-label">Lí do hủy:</label>
+                                        <textarea class="form-control" id="message-text"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="hidden" name="id_order" value="<?php echo $id_order; ?>">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                    <button type="submit" class="btn btn-primary" name="Cancel">Gửi</button>
+                                </div>
+
+                            </div>
+                        
+                        </div>
+                    </form>
+                </div>
             <?php
             }
-
             ?>
         </div>
     </div>
 
+
     <script>
+        function showCancelForm() {
+            document.getElementById('cancelForm').style.display = 'block';
+        }
+    </script>
+
+
+    <script>    
         document.addEventListener("DOMContentLoaded", function() {
             var successAlert = document.getElementById('success-alert');
             var expireTime = <?= !empty($_SESSION['success_expire']) ? $_SESSION['success_expire'] : 0 ?>;

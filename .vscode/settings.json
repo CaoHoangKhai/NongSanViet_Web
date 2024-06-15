@@ -1,3 +1,8 @@
 {
-    "liveServer.settings.port": 5501
+    "liveServer.settings.port": 5501,
+    "emmet.showAbbreviationSuggestions": true,
+    "emmet.showExpandedAbbreviation": "always",
+    "emmet.preferences": {},
+    "emmet.showSuggestionsAsSnippets": true,
+    "emmet.useInlineCompletions": true
 }
